@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
+import Settings from '../views/Settings.vue'
+import HomeCards from '../views/HomeCards.vue'
 import { auth } from '../firebase'
 
 const routes = [
@@ -9,10 +11,14 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    children: [
+      {path: '', component: HomeCards},
+      {path: 'settings', component: Settings}
+    ]
     // meta: {
     //   requiresAuth: true
     // }
-  },
+  },  
   {
     path: '/about',
     name: 'About',
