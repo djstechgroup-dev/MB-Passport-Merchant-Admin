@@ -45,8 +45,8 @@
 						<button class="btn btn-large col-12" type="submit">
 							<h2 class="mb-0">Sign In</h2>
 						</button>
-                        <div class="py-3">
-                            <a href="/register">I forgot my password</a>
+                        <div class="pt-3">
+                			<router-link to="/forgot-password"><p>I forgot my password</p></router-link>
                         </div>
 						<div class="">
 							<a href="/register">Don't have account</a>

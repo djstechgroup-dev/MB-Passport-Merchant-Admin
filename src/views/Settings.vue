@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="text-end">
-                <a href="/">I forgot my password</a>
+                <router-link to="/forgot-password"><p>I forgot my password</p></router-link>
                 <button class="btn mx-3 col-4 shadow" type="submit" 
                 style="background-color: #C3F9D1; color: black; border-radius: 20px;">
                     <p style="margin-bottom: 0;">Save</p>

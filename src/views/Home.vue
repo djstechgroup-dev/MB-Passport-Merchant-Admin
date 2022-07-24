@@ -45,7 +45,7 @@
                 <h3>New Deal</h3>
               </div>
               <div class="border-bar pt-2">
-                <h3>All Deals</h3>
+                <router-link to="/alldeals"><h3>All Deals</h3></router-link>
               </div>
               <div class="border-bar pt-2">
                 <h3>Manage Business</h3>

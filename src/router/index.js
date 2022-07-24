@@ -4,6 +4,9 @@ import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 import Settings from '../views/Settings.vue'
 import HomeCards from '../views/HomeCards.vue'
+import AllDeals from '../views/AllDeals.vue'
+import ForgotPassword from '../views/ForgotPassword.vue'
+import CreateNewPassword from  '../views/Create-Password.vue'
 import { auth } from '../firebase'
 
 const routes = [
@@ -13,7 +16,8 @@ const routes = [
     component: Home,
     children: [
       {path: '', component: HomeCards},
-      {path: 'settings', component: Settings}
+      {path: 'settings', component: Settings},
+      {path: 'alldeals', component: AllDeals}
     ]
     // meta: {
     //   requiresAuth: true
@@ -36,6 +40,16 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/forgot-password',
+    name: 'Forgot Password',
+    component: ForgotPassword
+  },
+  {
+    path: '/create-new-password',
+    name: 'Create New Password',
+    component: CreateNewPassword
   }
 ]
 
