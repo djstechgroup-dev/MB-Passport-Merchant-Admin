@@ -42,8 +42,8 @@
                 <td>{{item.business}}</td>
                 <td>{{item.status}}</td>
                 <td>{{item.campaign_dates}}</td>
-                <img src="../assets/edit.png" alt="edit">
-                <img src="../assets/delete.png" alt="delete">
+                <img src="..\..\assets\edit.png" alt="edit">
+                <img src="..\..\assets\delete.png" alt="delete">
                 </tr>
             </tbody>
         </table>

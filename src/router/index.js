@@ -7,6 +7,9 @@ import HomeCards from '../views/HomeCards.vue'
 import AllDeals from '../views/AllDeals.vue'
 import ForgotPassword from '../views/ForgotPassword.vue'
 import CreateNewPassword from  '../views/Create-Password.vue'
+import AdminAllDeals from '../views/admin/AdminAllDeals.vue'
+import AdminHome from '../views/admin/AdminHome.vue'
+import AdminHomeCards from '../views/admin/AdminHomeCards.vue'
 import { auth } from '../firebase'
 
 const routes = [
@@ -23,6 +26,18 @@ const routes = [
     //   requiresAuth: true
     // }
   },  
+  {
+    path: '/admin',
+    name: 'AdminHome',
+    component: AdminHome,
+    children: [
+      {path: '', component: AdminHomeCards},
+      {path: 'adminalldeals', component: AdminAllDeals}
+    ]
+    // meta: {
+    //   requiresAuth: true
+    // }
+  },
   {
     path: '/about',
     name: 'About',
