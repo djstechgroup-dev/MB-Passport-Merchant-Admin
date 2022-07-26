@@ -1,7 +1,7 @@
 <template>
     <main>
         <div class="text-center" style="background-color: #FFD75B; padding: none;">
-        <h3>Admin - Manage All Deals</h3>
+        <h3>Admin - Manage All Business</h3>
       </div>
         <div class="d-flex p-3">
             <div class="px-3">
@@ -41,10 +41,11 @@
             <tbody>
                 <tr v-for="item in items">
                 <th scope="row" class="rect">Icon</th>
-                <td>{{item.deal}}</td>
-                <td>{{item.business}}</td>
+                <td>{{item.businessName}}</td>
                 <td>{{item.status}}</td>
-                <td>{{item.campaign_dates}}</td>
+                <td>{{item.date_joined}}</td>
+                <td>{{item.deals_active}}</td>
+                <td>{{item.business_code}}</td>
                 <img src="..\..\assets\edit.png" alt="edit">
                 <img src="..\..\assets\delete.png" alt="delete">
                 </tr>
@@ -59,46 +60,60 @@
             return {
                 items: [
                     { 
-                        deal: '$5 OFF admission', 
+                        BusinessName: '$5 OFF admission', 
                         business: 'The Alabama Theatre',
                         status: 'Active',
-                        campaign_dates: '1/1/22 - 3/1/22' 
+                        date_joined: '1/1/22 - 3/1/22',
+                        deals_active: '1',
+                        business_code: '000000'
                     }, 
                     { 
-                        deal: 'Bogo Burgers', 
+                        BusinessName: 'Bogo Burgers', 
                         business: 'Joe’s Grill on the Beach',
                         status: 'Active',
-                        campaign_dates: '1/1/22 - 3/1/22' 
+                        date_joined: '1/1/22 - 3/1/22',
+                        deals_active: '1',
+                        business_code: '000000'
                     }, 
                     { 
-                        deal: 'Bogo Burgers', 
+                        BusinessName: 'Bogo Burgers', 
                         business: 'Joe’s Grill on the Beach',
                         status: 'Active',
-                        campaign_dates: '1/1/22 - 3/1/22' 
+                        date_joined: '1/1/22 - 3/1/22',
+                        deals_active: '1',
+                        business_code: '000000'
                     }, 
                     { 
-                        deal: 'Bogo Burgers', 
+                        BusinessName: 'Bogo Burgers', 
                         business: 'Joe’s Grill on the Beach',
                         status: 'Active',
-                        campaign_dates: '1/1/22 - 3/1/22' 
+                        date_joined: '1/1/22 - 3/1/22',
+                        deals_active: '1',
+                        business_code: '000000'
                     }, 
                     { 
-                        deal: 'Bogo Burgers', 
+                        BusinessName: 'Bogo Burgers', 
                         business: 'Joe’s Grill on the Beach',
                         status: 'Active',
-                        campaign_dates: '1/1/22 - 3/1/22' 
+                        date_joined: '1/1/22 - 3/1/22',
+                        deals_active: '1',
+                        business_code: '000000'
                     }, 
                     { 
-                        deal: 'Bogo Burgers', 
+                        BusinessName: 'Bogo Burgers', 
                         business: 'Joe’s Grill on the Beach',
                         status: 'Active',
-                        campaign_dates: '1/1/22 - 3/1/22' 
+                        date_joined: '1/1/22 - 3/1/22',
+                        deals_active: '1',
+                        business_code: '000000'
                     }, 
                     { 
-                        deal: 'Bogo Burgers', 
+                        BusinessName: 'Bogo Burgers', 
                         business: 'Joe’s Grill on the Beach',
                         status: 'Active',
-                        campaign_dates: '1/1/22 - 3/1/22' 
+                        date_joined: '1/1/22 - 3/1/22',
+                        deals_active: '1',
+                        business_code: '000000'
                     }, 
                 ]
             }

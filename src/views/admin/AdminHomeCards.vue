@@ -1,4 +1,7 @@
 <template>
+      <div class="text-center" style="background-color: #FFD75B; padding: none;">
+        <h3>Admin View</h3>
+      </div>
     <main>
               <div class="row p-2">
               <div class="col-sm-4">

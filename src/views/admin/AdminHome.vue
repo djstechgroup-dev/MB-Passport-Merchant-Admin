@@ -37,27 +37,27 @@
       </div>
     <div class="">
         <div class="row">
-            <div class="col-3 border-ver">
+            <div class="col-3 border-ver" style="background-color: #FFD75B;">
               <div class="border-bar pt-2">
-                <router-link to="/"><h3>Home</h3></router-link>
+                <router-link to="/admin"><h3>Home</h3></router-link>
               </div>
               <div class="border-bar pt-2">
                 <h3>New Deal</h3>
               </div>
               <div class="border-bar pt-2">
-                <router-link to="admin/adminalldeals"><h3>All Deals</h3></router-link>
+                <router-link to="/admin/adminalldeals"><h3>All Deals</h3></router-link>
               </div>
               <div class="border-bar pt-2">
-                <h3>Manage Business</h3>
+                <router-link to="/admin/adminallbusiness"><h3>Manage Business</h3></router-link>
               </div>
               <div class="border-bar pt-2">
-                <router-link to="/settings"><h3>Settings</h3></router-link>
+                <router-link to="/admin/adminsettings"><h3>Settings</h3></router-link>
               </div>
               <div class="border-bar pt-2">
                 <h3>Help</h3>
               </div>
             </div>
-            <div class="col-9" style="text-align: justify;">
+            <div class="col-9" style="text-align: justify; padding: none;">
           <router-view></router-view>
             </div>
         </div>

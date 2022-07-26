@@ -41,8 +41,8 @@
               <div class="border-bar pt-2">
                 <router-link to="/"><h3>Home</h3></router-link>
               </div>
-              <div class="border-bar pt-2">
-                <h3>New Deal</h3>
+              <div class="border-bar pt-2">                
+                <router-link to="/newdeal"><h3>New Deals</h3></router-link>
               </div>
               <div class="border-bar pt-2">
                 <router-link to="/alldeals"><h3>All Deals</h3></router-link>
