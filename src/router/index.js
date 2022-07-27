@@ -8,6 +8,8 @@ import AllDeals from '../views/AllDeals.vue'
 import NewDeal from '../views/NewDeal.vue'
 import ForgotPassword from '../views/ForgotPassword.vue'
 import CreateNewPassword from  '../views/Create-Password.vue'
+import NewBusiness from '../views/NewBusiness.vue'
+import EditBusiness from '../views/EditBusiness.vue'
 import AdminAllDeals from '../views/admin/AdminAllDeals.vue'
 import AdminHome from '../views/admin/AdminHome.vue'
 import AdminHomeCards from '../views/admin/AdminHomeCards.vue'
@@ -23,7 +25,11 @@ const routes = [
       {path: '', component: HomeCards},
       {path: 'settings', component: Settings},
       {path: 'alldeals', component: AllDeals},
-      {path: 'newdeal', component: NewDeal}
+      {path: 'newdeal', component: NewDeal},
+      {path: 'newbusiness' , component: NewBusiness},
+      {path: 'editbusiness' , component: EditBusiness},
+      
+
     ]
     // meta: {
     //   requiresAuth: true
