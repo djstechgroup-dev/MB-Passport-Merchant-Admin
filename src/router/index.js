@@ -6,11 +6,14 @@ import Settings from '../views/Settings.vue'
 import HomeCards from '../views/HomeCards.vue'
 import AllDeals from '../views/AllDeals.vue'
 import NewDeal from '../views/NewDeal.vue'
+import IndividualPage from '../views/IndividualBusinessPage.vue'
 import ForgotPassword from '../views/ForgotPassword.vue'
 import CreateNewPassword from  '../views/Create-Password.vue'
 import NewBusiness from '../views/NewBusiness.vue'
 import EditBusiness from '../views/EditBusiness.vue'
+import EditLocation from '../views/EditLocation.vue'
 import AdminAllDeals from '../views/admin/AdminAllDeals.vue'
+import AdminDealOfTheDay from '../views/admin/AdminDealOfTheDay.vue'
 import AdminHome from '../views/admin/AdminHome.vue'
 import AdminHomeCards from '../views/admin/AdminHomeCards.vue'
 import AdminAllBusiness from '../views/admin/AdminAllBusiness.vue'
@@ -26,9 +29,10 @@ const routes = [
       {path: 'settings', component: Settings},
       {path: 'alldeals', component: AllDeals},
       {path: 'newdeal', component: NewDeal},
+      {path: 'individualpage', component: IndividualPage},
       {path: 'newbusiness' , component: NewBusiness},
       {path: 'editbusiness' , component: EditBusiness},
-      
+      {path: 'editlocation', component: EditLocation}
 
     ]
     // meta: {
@@ -44,19 +48,20 @@ const routes = [
       {path: 'adminalldeals', component: AdminAllDeals},
       {path: 'adminallbusiness', component: AdminAllBusiness},
       {path: 'adminsettings', component: Settings},
+      {path: 'admindealoftheday', component: AdminDealOfTheDay}
     ]
     // meta: {
     //   requiresAuth: true
     // }
   },
-  {
-    path: '/about',
-    name: 'About',
-    component: () => import('../views/About.vue'),
-    meta: {
-      requiresAuth: true
-    }
-  },
+  // {
+  //   path: '/about',
+  //   name: 'About',
+  //   component: () => import('../views/About.vue'),
+  //   meta: {
+  //     requiresAuth: true
+  //   }
+  // },
   {
     path: '/register',
     name: 'Register',

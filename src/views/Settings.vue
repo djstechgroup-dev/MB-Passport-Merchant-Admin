@@ -14,6 +14,7 @@
             <p>Name: Cooper Moelchert</p>
             <p>Email: cooper@strange-ventures.com</p>
             <p>Phone#: (999)999-9999</p>
+            
         </div>
     </div>
     <div class="col-md text-end">				

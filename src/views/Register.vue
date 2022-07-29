@@ -10,8 +10,7 @@
 					<p class="para-register">service and privacy policy</p>
 					<div class="py-3">
 						<button class="btn btn-google shadow">
-							<!-- <font-awesome-icon icon="fa-brands fa-google" />
-							<font-awesome-icon icon="fa-solid fa-user-secret" /> -->
+							<img src="../assets/google.png" alt="Save icon"/>
 							Continue with google
 						</button>
 					</div>

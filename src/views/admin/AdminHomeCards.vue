@@ -7,20 +7,10 @@
               <div class="col-sm-4">
                 <div class="card border-0">
                   <div class="card-body text-center">
-                    <img src="..\..\assets\add.png" alt="Paris">
-                    <h5 class="card-title pt-3">New Deal</h5>
-                    <hr class="hr-login"/>
-                    <p>Create a New Deal</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-4">
-                <div class="card border-0">
-                  <div class="card-body text-center">
                     <img src="..\..\assets\deal.png" alt="Paris">
-                    <h5 class="card-title pt-3">All Deals</h5>
+                    <h5 class="card-title pt-3">View All Active Deals</h5>
                     <hr class="hr-login"/>
-                    <p>Manage current deals and view your history</p>
+                    <p>Manage current deals and view your deal history</p>
                   </div>
                 </div>
               </div>
@@ -28,9 +18,19 @@
                 <div class="card border-0">
                   <div class="card-body text-center">
                     <img src="..\..\assets\business.png" alt="Paris">
-                    <h5 class="card-title pt-3">Business Info</h5>
+                    <h5 class="card-title pt-3">Manage All Businesses</h5>
                     <hr class="hr-login"/>
-                    <p>manage business information like hours of operation</p>
+                    <p>Edit business information, Activate Merchants</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="card border-0">
+                  <div class="card-body text-center">
+                    <img src="..\..\assets\star.png" alt="Paris">
+                    <h5 class="card-title pt-3">Deal of the Day</h5>
+                    <hr class="hr-login"/>
+                    <p>Manage deal of the day information</p>
                   </div>
                 </div>
               </div>

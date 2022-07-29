@@ -45,16 +45,27 @@
                 <h3>New Deal</h3>
               </div>
               <div class="border-bar pt-2">
-                <router-link to="/admin/adminalldeals"><h3>All Deals</h3></router-link>
+                <router-link to="/admin/adminalldeals"><h3>Manage All Deals</h3></router-link>
+              </div>
+               <div class="border-bar pt-2">
+                <router-link to="/admin/adminallbusiness"><h3>Manage All Business</h3></router-link>
               </div>
               <div class="border-bar pt-2">
-                <router-link to="/admin/adminallbusiness"><h3>Manage Business</h3></router-link>
+                <router-link to="/admin/AdminDealOfTheDay"><h3>Deal Of The Day</h3></router-link>
               </div>
+            
               <div class="border-bar pt-2">
                 <router-link to="/admin/adminsettings"><h3>Settings</h3></router-link>
               </div>
               <div class="border-bar pt-2">
                 <h3>Help</h3>
+              </div>
+                  <div class="border-bar pt-2 " style="height: 50px;"/>
+              <div class="border-bar pt-2 " style="height: 50px;"/> 
+              <div class="border-bar pt-2 " style="height: 50px;"/>
+               <div class="border-bar pt-2 " style="height: 50px;"/>
+               <div class="border-bar pt-2">
+                <h3>Logout</h3>
               </div>
             </div>
             <div class="col-9" style="text-align: justify; padding: none;">

@@ -36,6 +36,7 @@
                 <th scope="col">Business</th>
                 <th scope="col">Status</th>
                 <th scope="col">Campaign Dates</th>
+              
                 </tr>
             </thead>
             <tbody>

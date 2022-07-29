@@ -109,7 +109,7 @@
                 </td>
                 </tr> 
                 <tr>
-                <td colspan="2" style="background-color: #C3F9D1" class="text-center"><h2>Save</h2></td>
+                <td colspan="2" style="background-color: #C3F9D1" class="text-center"><router-link to="individualpage"><h2>Save</h2></router-link></td>
                 </tr>
             </tbody>
         </table>

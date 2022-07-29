@@ -32,19 +32,22 @@
             <thead>
                 <tr>
                 <th></th>
-                <th scope="col">Deal</th>
-                <th scope="col">Business</th>
+                <th scope="col">Business Name</th>
                 <th scope="col">Status</th>
-                <th scope="col">Campaign Dates</th>
+                <th scope="col">Date Joined</th>
+                <th scope="col">Deals Active</th>
+                <th scope="col">Business Code</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="item in items">
                 <th scope="row" class="rect">Icon</th>
                 <td>{{item.businessName}}</td>
-                <td>{{item.status}}</td>
+                <td>{{item.status}}         <img src="..\..\assets\pause.png" alt="edit"/></td>
+                  
                 <td>{{item.date_joined}}</td>
                 <td>{{item.deals_active}}</td>
+              
                 <td>{{item.business_code}}</td>
                 <img src="..\..\assets\edit.png" alt="edit">
                 <img src="..\..\assets\delete.png" alt="delete">

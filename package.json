@@ -11,8 +11,10 @@
     "@fortawesome/vue-fontawesome": "^3.0.1",
     "core-js": "^3.23.5",
     "firebase": "^9.9.0",
+    "v-md-date-range-picker": "^2.6.0",
     "vue": "^3.2.37",
     "vue-router": "^4.1.2",
+    "vue3-datepicker": "^0.3.4",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
