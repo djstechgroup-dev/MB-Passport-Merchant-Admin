@@ -6,7 +6,7 @@ import {
   signInWithEmailAndPassword,
   signOut 
 } from 'firebase/auth'
-import { signup } from '../actions/auth'
+import { signup, signin } from '../actions/auth'
 export default createStore({
   state: {
     user: null
@@ -26,40 +26,37 @@ export default createStore({
     async login ({ commit }, details) {
       const { email, password } = details
 
-      try {
-        await signInWithEmailAndPassword(auth, email, password)
-      } catch (error) {
-        switch(error.code) {
-          case 'auth/user-not-found':
-            alert("User not found")
-            break
-          case 'auth/wrong-password':
-            alert("Wrong password")
-            break
-          default:
-            alert("Something went wrong")
+      signin({email, password}).then(res => {
+        if (res && res.jwt && localStorage) {
+          localStorage.setItem('data', JSON.stringify(res))
         }
+        if (res) {
+          commit('SET_USER', res.message)
+    
+          router.push('/')
+        }
+      }).catch(err => {
+        console.log(err)
+      })
 
-        return
-      }
-
-      commit('SET_USER', auth.currentUser)
-
-      router.push('/')
     },
 
     async register ({ commit}, details) {
        const {email, password, firstName, lastName, businessName } = details
 
       signup({email, password, firstName, lastName, businessName}).then(res => {
-        console.log(res)
+        if (res && res.jwt && localStorage) {
+          localStorage.setItem('data', JSON.stringify(res))
+        }
+        if (res) {
+          commit('SET_USER', res.message)
+    
+          router.push('/')
+        }
       }).catch(err => {
         console.log(err)
       })
 
-      commit('SET_USER', auth.currentUser)
-
-      router.push('/')
     },
 
     async logout ({ commit }) {

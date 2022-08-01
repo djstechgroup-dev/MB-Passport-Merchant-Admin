@@ -34,10 +34,10 @@ const routes = [
       {path: 'editbusiness' , component: EditBusiness},
       {path: 'editlocation', component: EditLocation}
 
-    ]
-    // meta: {
-    //   requiresAuth: true
-    // }
+    ],
+    meta: {
+      requiresAuth: true
+    }
   },  
   {
     path: '/admin',
@@ -49,10 +49,10 @@ const routes = [
       {path: 'adminallbusiness', component: AdminAllBusiness},
       {path: 'adminsettings', component: Settings},
       {path: 'admindealoftheday', component: AdminDealOfTheDay}
-    ]
-    // meta: {
-    //   requiresAuth: true
-    // }
+    ],
+    meta: {
+      requiresAuth: true
+    }
   },
   // {
   //   path: '/about',
@@ -90,12 +90,14 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.path === '/register' && auth.currentUser) {
+  let localUser = JSON.parse(localStorage.getItem('data'))
+  // console.log("THIS IS", localUser)
+  if (to.path === '/register' && localUser) {
     next('/')
     return;
   }
 
-  if (to.matched.some(record => record.meta.requiresAuth) && !auth.currentUser) {
+  if (to.matched.some(record => record.meta.requiresAuth) && !localUser) {
     next('/register')
     return;
   }
