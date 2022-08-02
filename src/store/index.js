@@ -27,11 +27,12 @@ export default createStore({
       const { email, password } = details
 
       signin({email, password}).then(res => {
+        console.log(res)
         if (res && res.jwt && localStorage) {
           localStorage.setItem('data', JSON.stringify(res))
         }
         if (res) {
-          commit('SET_USER', res.message)
+          commit('SET_USER', res)
     
           router.push('/')
         }
