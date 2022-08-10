@@ -2,12 +2,13 @@ import { initializeApp } from "firebase/app"
 import { getAuth } from "firebase/auth"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB3Z8T6I_ZZ9fnXnUUGDL9-3ocJVII3wEM",
-  authDomain: "vue-fire-auth-yt.firebaseapp.com",
-  projectId: "vue-fire-auth-yt",
-  storageBucket: "vue-fire-auth-yt.appspot.com",
-  messagingSenderId: "745571531497",
-  appId: "1:745571531497:web:31ef49d3de839b54030e78"
+  apiKey: "AIzaSyDYdKW5l0gZKPM4boKJm0aPLYOXJAA1XkU",
+  authDomain: "myrtle-beach-passport.firebaseapp.com",
+  projectId: "myrtle-beach-passport",
+  storageBucket: "myrtle-beach-passport.appspot.com",
+  messagingSenderId: "526517584025",
+  appId: "1:526517584025:web:94564a73df690fcee37808",
+  measurementId: "G-YDWB6S10JS"
 }
 
 const app = initializeApp(firebaseConfig)

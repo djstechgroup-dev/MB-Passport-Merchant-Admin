@@ -23,24 +23,49 @@ export default createStore({
 
   },
   actions: {
+
+
     async login ({ commit }, details) {
+
       const { email, password } = details
 
-      signin({email, password}).then(res => {
-        console.log(res)
-        if (res && res.jwt && localStorage) {
-          localStorage.setItem('data', JSON.stringify(res))
+      try {
+        const user = await signInWithEmailAndPassword(auth, email, password)
+
+        const userData = await signin({email, password})
+
+        console.log(userData)
+
+      } catch (error) {
+        switch(error.code) {
+          case 'auth/user-not-found':
+            alert('Invalid credentials')
+            break
+          case 'auth/wrong-password':
+            alert('Incorrect password')
+            break
+          default:
+            alert(error.message)
         }
-        if (res) {
-          commit('SET_USER', res)
+      }
+      
+
+      // signin({email, password}).then(res => {
+       
+      //   if (res && res.jwt && localStorage) {
+      //     localStorage.setItem('data', JSON.stringify(res))
+      //   }
+      //   if (res) {
+      //     commit('SET_USER', res)
     
-          router.push('/')
-        }
-      }).catch(err => {
-        console.log(err)
-      })
+      //     router.push('/')
+      //   }
+      // }).catch(err => {
+      //   console.log(err)
+      // })
 
     },
+
 
     async register ({ commit}, details) {
        const {email, password, firstName, lastName, businessName } = details
@@ -60,13 +85,13 @@ export default createStore({
 
     },
 
+
     async logout ({ commit }) {
       await signOut(auth)
-
       commit('CLEAR_USER')
-
       router.push('/login')
     },
+
 
     fetchUser ({ commit }) {
       auth.onAuthStateChanged(async user => {

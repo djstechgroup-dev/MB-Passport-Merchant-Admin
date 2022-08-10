@@ -16,7 +16,7 @@ export default {
     const store = useStore()
 
     onBeforeMount(() => {
-      store.dispatch('fetchUser')
+      //store.dispatch('fetchUser')
     })
   }
 }
