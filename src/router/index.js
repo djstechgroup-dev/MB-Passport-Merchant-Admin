@@ -17,7 +17,9 @@ import AdminDealOfTheDay from '../views/admin/AdminDealOfTheDay.vue'
 import AdminHome from '../views/admin/AdminHome.vue'
 import AdminHomeCards from '../views/admin/AdminHomeCards.vue'
 import AdminAllBusiness from '../views/admin/AdminAllBusiness.vue'
+import store from './../store'
 import { auth } from '../firebase'
+import { toRaw } from 'vue'
 
 const routes = [
   {
@@ -90,19 +92,37 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  let localUser = JSON.parse(localStorage.getItem('data'))
-  // console.log("THIS IS", localUser)
-  if (to.path === '/register' && localUser) {
+
+  const userObj = store.state.user
+
+  const user = JSON.parse(JSON.stringify(userObj))
+
+  console.log(user)
+  
+  if (to.path === '/register' && user) {
+
+    if(user.role == 1) next('/admin')
+
     next('/')
-    return;
+
+    return
   }
 
-  if (to.matched.some(record => record.meta.requiresAuth) && !localUser) {
-    next('/register')
-    return;
+  if (to.path === '/login' && user) {
+    if(user.role == 1) next('/admin')
+
+    next('/')
+    
+    return
   }
 
-  next();
+  if (to.matched.some(record => record.meta.requiresAuth) && !user) {
+    next('/login')
+    return
+  }
+
+  next()
+
 })
 
 export default router

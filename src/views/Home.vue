@@ -64,7 +64,7 @@
               <div class="border-bar pt-2 " style="height: 50px;"/>
                <div class="border-bar pt-2 " style="height: 50px;"/>
                <div class="border-bar pt-2">
-                <h3>Logout</h3>
+                <button @click="logout">LOGOUT</button>
               </div>
             </div>
             <div class="col-9" style="text-align: justify;">
@@ -74,6 +74,24 @@
     </div>
   </main>
 </template>
+
+<script>
+import { ref } from 'vue'
+import { useStore } from 'vuex'
+export default {
+  setup() {
+    const store = useStore();
+
+    const logout = () => {
+      store.dispatch('logout')
+    }
+
+    return {
+      logout
+    }
+  }
+}
+</script>
 
 <style>
 .main {

@@ -2,7 +2,8 @@ import { createStore } from 'vuex'
 import router from '../router'
 import { auth } from '../firebase'
 import { 
-  createUserWithEmailAndPassword,
+  signInWithPopup, 
+  GoogleAuthProvider,
   signInWithEmailAndPassword,
   signOut 
 } from 'firebase/auth'
@@ -10,6 +11,11 @@ import { signup, signin } from '../actions/auth'
 export default createStore({
   state: {
     user: null
+  },
+  getters: {
+    currentUser (state) {
+      return state.user
+    }
   },
   mutations: {
 
@@ -24,15 +30,15 @@ export default createStore({
   },
   actions: {
 
-
     async login ({ commit }, details) {
 
       const { email, password } = details
 
       try {
-        const user = await signInWithEmailAndPassword(auth, email, password)
 
-        const userData = await signin({email, password})
+        await signInWithEmailAndPassword(auth, email, password)
+
+        const userData = await signin(email)
 
         console.log(userData)
 
@@ -48,41 +54,40 @@ export default createStore({
             alert(error.message)
         }
       }
-      
+    },
 
-      // signin({email, password}).then(res => {
-       
-      //   if (res && res.jwt && localStorage) {
-      //     localStorage.setItem('data', JSON.stringify(res))
-      //   }
-      //   if (res) {
-      //     commit('SET_USER', res)
-    
-      //     router.push('/')
-      //   }
-      // }).catch(err => {
-      //   console.log(err)
-      // })
+    async signInWithGoogle({commit}) {
 
+      const provider = new GoogleAuthProvider()
+
+      try {
+        const result = await signInWithPopup(auth, provider)
+        const email = result.user.email
+        const {token, user} = await signin(email)
+
+        localStorage.setItem('session', token)
+        commit('SET_USER', user)
+        router.push('/')
+
+      } catch (error) {
+        console.log(error)
+      }
     },
 
 
     async register ({ commit}, details) {
-       const {email, password, firstName, lastName, businessName } = details
 
-      signup({email, password, firstName, lastName, businessName}).then(res => {
-        if (res && res.jwt && localStorage) {
-          localStorage.setItem('data', JSON.stringify(res))
-        }
-        if (res) {
-          commit('SET_USER', res.message)
-    
-          router.push('/')
-        }
-      }).catch(err => {
-        console.log(err)
-      })
+      const {email, password, firstName, lastName, businessName } = details
 
+      try {
+        const user = await signup({email, password, firstName, lastName, businessName})
+        localStorage.setItem('session', token)
+        commit('SET_USER', user)
+        router.push('/')
+
+      } catch (error) {
+        console.log(error)
+      }
     },
 
 
@@ -95,15 +100,32 @@ export default createStore({
 
     fetchUser ({ commit }) {
       auth.onAuthStateChanged(async user => {
-        if (user === null) {
+
+        const token= user.accessToken
+
+        const response = await fetch('http://localhost:8000/api/auth/user', {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        })
+
+        const {user: authUser} = await response.json()
+
+
+        if (authUser === null) {
           commit('CLEAR_USER')
         } else {
-          commit('SET_USER', user)
+
+          commit('SET_USER', authUser)
 
           if (router.isReady() && router.currentRoute.value.path === '/login') {
             router.push('/')
           }
         }
+
       })
     }
     
