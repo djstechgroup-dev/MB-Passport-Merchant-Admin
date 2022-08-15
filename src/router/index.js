@@ -1,3 +1,4 @@
+
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Register from '../views/Register.vue'
@@ -17,9 +18,8 @@ import AdminDealOfTheDay from '../views/admin/AdminDealOfTheDay.vue'
 import AdminHome from '../views/admin/AdminHome.vue'
 import AdminHomeCards from '../views/admin/AdminHomeCards.vue'
 import AdminAllBusiness from '../views/admin/AdminAllBusiness.vue'
-import store from './../store'
-import { auth } from '../firebase'
-import { toRaw } from 'vue'
+import { useAuthStore } from '../store/auth'
+import {auth} from './../firebase'
 
 const routes = [
   {
@@ -56,14 +56,6 @@ const routes = [
       requiresAuth: true
     }
   },
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   component: () => import('../views/About.vue'),
-  //   meta: {
-  //     requiresAuth: true
-  //   }
-  // },
   {
     path: '/register',
     name: 'Register',
@@ -91,38 +83,21 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
 
-  const userObj = store.state.user
+  const session = localStorage.getItem('session') || ''
 
-  const user = JSON.parse(JSON.stringify(userObj))
-
-  console.log(user)
-  
-  if (to.path === '/register' && user) {
-
-    if(user.role == 1) next('/admin')
-
-    next('/')
-
-    return
+  if (to.path === '/login' && session) {
+      next('/')
+      return
   }
 
-  if (to.path === '/login' && user) {
-    if(user.role == 1) next('/admin')
-
-    next('/')
-    
-    return
-  }
-
-  if (to.matched.some(record => record.meta.requiresAuth) && !user) {
+  if(to.matched.some(rec => rec.meta.requiresAuth) && !session) {
     next('/login')
     return
   }
 
   next()
-
 })
 
 export default router

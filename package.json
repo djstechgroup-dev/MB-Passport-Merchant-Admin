@@ -9,8 +9,11 @@
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/vue-fontawesome": "^3.0.1",
+    "axios": "^0.27.2",
     "core-js": "^3.23.5",
     "firebase": "^9.9.0",
+    "mande": "^2.0.3",
+    "pinia": "^2.0.18",
     "v-md-date-range-picker": "^2.6.0",
     "vue": "^3.2.37",
     "vue-router": "^4.1.2",

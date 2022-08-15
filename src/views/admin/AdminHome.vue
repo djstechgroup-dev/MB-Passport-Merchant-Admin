@@ -76,6 +76,28 @@
   </main>
 </template>
 
+<script>
+import { useAuthStore } from '../../store/auth';
+import router from './../../router'
+
+export default {
+  data() {
+    return {
+    }
+  },
+  methods: {
+  },
+  created() {
+    const authStore = useAuthStore()
+    const permission = authStore.permission
+
+    if(permission == 'merchant') router.push('/')
+
+    console.log(permission)
+  }
+}
+</script>
+
 <style>
 .main {
 	height: 100vh;

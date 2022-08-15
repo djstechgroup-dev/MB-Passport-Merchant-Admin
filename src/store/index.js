@@ -1,4 +1,4 @@
-import { createStore } from 'vuex'
+import Vuex from 'vuex'
 import router from '../router'
 import { auth } from '../firebase'
 import { 
@@ -8,7 +8,8 @@ import {
   signOut 
 } from 'firebase/auth'
 import { signup, signin } from '../actions/auth'
-export default createStore({
+
+const store = new Vuex.Store({
   state: {
     user: null
   },
@@ -28,8 +29,8 @@ export default createStore({
     }
 
   },
-  actions: {
 
+  actions: {
     async login ({ commit }, details) {
 
       const { email, password } = details
@@ -38,9 +39,11 @@ export default createStore({
 
         await signInWithEmailAndPassword(auth, email, password)
 
-        const userData = await signin(email)
+        const {token, user} = await signin(email)
 
-        console.log(userData)
+        localStorage.setItem('session', token)
+        commit('SET_USER', user)
+        router.push('/')
 
       } catch (error) {
         switch(error.code) {
@@ -75,17 +78,21 @@ export default createStore({
     },
 
 
-    async register ({ commit}, details) {
+    async register ({commit},details) {
 
       const {email, password, firstName, lastName, businessName } = details
 
       try {
-        const user = await signup({email, password, firstName, lastName, businessName})
-        localStorage.setItem('session', token)
-        commit('SET_USER', user)
-        router.push('/')
+        const response = await signup({email, password, firstName, lastName, businessName})
+
+        if(response.error) throw response.error.message
+
+        alert('Success, you may now sign in your account')
+
+        router.push('/login')
 
       } catch (error) {
+        alert(error)
         console.log(error)
       }
     },
@@ -98,32 +105,40 @@ export default createStore({
     },
 
 
-    fetchUser ({ commit }) {
+    async fetchUser ({ commit }) {
+
       auth.onAuthStateChanged(async user => {
 
-        const token= user.accessToken
+        if(user) {
 
-        const response = await fetch('http://localhost:8000/api/auth/user', {
-          method: 'GET',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          }
-        })
+          const token = user.accessToken
 
-        const {user: authUser} = await response.json()
+          const response = await fetch('http://localhost:8000/api/auth/user', {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            }
+          })
 
-
-        if (authUser === null) {
-          commit('CLEAR_USER')
-        } else {
-
-          commit('SET_USER', authUser)
-
-          if (router.isReady() && router.currentRoute.value.path === '/login') {
+          let _user = await response.json()
+          
+          console.log(_user)
+          
+          if(_user.role == 1) {
+            router.push('/admin')
+          } else {
             router.push('/')
           }
+
+          commit('SET_USER', _user)
+
+            
+          
+
+        } else {
+          commit('CLEAR_USER')
         }
 
       })
@@ -131,3 +146,5 @@ export default createStore({
     
   }
 })
+
+export default store

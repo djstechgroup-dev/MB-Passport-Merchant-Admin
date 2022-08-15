@@ -9,7 +9,7 @@
 						<p class="para-login">By continuing you agree our to our terms of</p>
 						<p class="para-login">service and privacy policy</p>
 						<div class="py-3">
-							<button class="btn btn-google shadow" @click="signInWithGoogle">
+							<button class="btn btn-google shadow" @click="authStore.signInWithGoogle">
 								<!-- <font-awesome-icon icon="fa-brands fa-google" /> -->
 								<img src="../assets/google.png" alt="Save icon" />
 								Continue with google
@@ -32,9 +32,9 @@
 					<form class="form-group m-auto col-md-8" @submit.prevent="login">
 						<div>
 							<input type="email" class="form-control my-3" placeholder="Email address"
-								v-model="login_form.email" />
+								v-model="loginForm.email" />
 							<input type="password" class="form-control my-3" placeholder="Password"
-								v-model="login_form.password" />
+								v-model="loginForm.password" />
 						</div>
 						<button class="btn btn-large col-12" type="submit">
 							<h2 class="mb-0">Sign In</h2>
@@ -63,30 +63,29 @@
 </template>
 
 <script>
+
 import { ref } from 'vue'
-import { useStore } from 'vuex'
+import {useAuthStore} from './../store/auth'
+
 export default {
 	setup () {
-		const login_form = ref({});
-		const store = useStore();
+
+		const authStore = useAuthStore()
+
+		const loginForm = ref({
+			email: '',
+			password: ''
+		})
 
 		const login = () => {
-			store.dispatch('login', login_form.value);
-		}
-
-		const signInWithGoogle = () => {
-			store.dispatch('signInWithGoogle')
-		}
-
-		const logout = () => {
-			store.dispatch('logout')
+			const {email, password} = loginForm.value
+			authStore.signIn(email, password)
 		}
 
 		return {
-			login_form,
-			login,
-			signInWithGoogle,
-			logout
+			authStore,
+			loginForm,
+			login
 		}
 	}
 }
