@@ -64,7 +64,7 @@
               <div class="border-bar pt-2 " style="height: 50px;"/>
                <div class="border-bar pt-2 " style="height: 50px;"/>
                <div class="border-bar pt-2">
-                <button @click="logout">LOGOUT</button>
+                <button @click="authStore.signOut">LOGOUT</button>
               </div>
             </div>
             <div class="col-9" style="text-align: justify;">
@@ -77,17 +77,13 @@
 
 <script>
 import { ref } from 'vue'
-import { useStore } from 'vuex'
+import { useAuthStore } from '../store/auth';
 export default {
   setup() {
-    const store = useStore();
-
-    const logout = () => {
-      store.dispatch('logout')
-    }
+    const authStore = useAuthStore();
 
     return {
-      logout
+      authStore
     }
   }
 }

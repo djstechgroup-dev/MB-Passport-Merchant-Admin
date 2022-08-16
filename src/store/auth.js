@@ -14,10 +14,10 @@ export const useAuthStore = defineStore('auth', {
         user: null
     }),
     getters: {
-        permission() {
+        permission(state) {
 
-            if(this.user) {
-                const role = this.user.role
+            if(state.user) {
+                const role = state.user.role
 
                 if(role === 0) return 'admin'
                 else return 'merchant'                
@@ -25,6 +25,9 @@ export const useAuthStore = defineStore('auth', {
                 return 'user'
             }
 
+        },
+        isAuth(state) {
+            return state.user !== null
         }
     },
     actions: {
@@ -33,10 +36,14 @@ export const useAuthStore = defineStore('auth', {
             const {email, password, firstName, lastName, businessName } = data
 
             try {
-              const response = await signup({email, password, firstName, lastName, businessName})
-              if(response.error) throw response.error.message
-              alert('Success, you may now sign in your account')
-              router.push('/login')
+              const response = await axios.post('auth/signup', {email, password, firstName, lastName, businessName}, {
+                withCredentials: true
+              })
+              
+              if(response.data) {
+                alert('Success, you may now sign in your account')
+                router.push('/login')
+              }
       
             } catch (error) {
               alert(error)
@@ -90,25 +97,35 @@ export const useAuthStore = defineStore('auth', {
               console.log(error)
             }
         },
-        signOut() {
-
+        async signOut() {
+            
+            try {
+                const {data} = await axios.post('auth/signout', {
+                    withCredentials: true
+                })
+                
+                if(data.success) {
+                    this.user = null
+                    localStorage.removeItem('session')
+                    router.push('/login')
+                }
+            } catch (error) {
+                console.log(error)
+            }
         },
-        async fetchUser () {
-            console.log('fetching user')
+        async fetchAuthUser () {
+
             try {
                 const {data} = await axios.get('auth/user', {
                     withCredentials: true
                 })
 
                 if(data.user) {
-                    
-                   localStorage.setItem('session', data.token)
                     this.user = data.user 
-
-                    console.log('state...', this.user.role)
+                    return data
                 } else {
-                    localStorage.removeItem('session')
                     this.user = null
+                    return null
                 }
                 
             } catch (error) {

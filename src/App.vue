@@ -8,35 +8,27 @@
 </template>
 
 <script>
-import { onBeforeMount, onMounted } from 'vue'
+import { onBeforeMount } from 'vue'
 import { useAuthStore } from './store/auth'
 
 export default {
 
-  data() {
-    return {
-      authUser: null,
-      authPermission: ''
-    }
-  },
-  methods: {
-    redirectAuthUser: function(e) {
-      console.log(this.permission)
-    }
-  },
-  beforeMount() {
+  setup() {
+
     const authStore = useAuthStore()
-    authStore.fetchUser()
 
-    const user = authStore.user
-    const permission = authStore.permission
+    onBeforeMount(async () => {
+      const data = await authStore.fetchAuthUser()
 
-    this.user = user
-    this.permission = permission
-  },
-  created() {
-    window.addEventListener('beforeunload', this.redirectAuthUser)
+      if(data) {
+        localStorage.setItem('session', data?.token)
+      } else {
+        localStorage.removeItem('session')
+      }
+    })
+
   }
+
 }
 </script>
 

@@ -9,7 +9,7 @@
 					<p class="para-register">By continuing you agree our to our terms of</p>
 					<p class="para-register">service and privacy policy</p>
 					<div class="py-3">
-						<button class="btn btn-google shadow">
+						<button class="btn btn-google shadow" @click="authStore.signInWithGoogle">
 							<img src="../assets/google.png" alt="Save icon"/>
 							Continue with google
 						</button>
@@ -35,14 +35,14 @@
 							type="text" 
 							class="form-control my-3 "
 							placeholder="First Name"
-							v-model="register_form.firstName" />
+							v-model="registerForm.firstName" />
 						</div>
 						<div class="col">
 						<input 
 							type="text" 
 							class="form-control my-3"
 							placeholder="Last Name"
-							v-model="register_form.lastName" />
+							v-model="registerForm.lastName" />
 						</div>
 					</div>
 					<div>
@@ -50,18 +50,18 @@
 							type="email" 
 							class="form-control my-3"
 							placeholder="Email address"
-							v-model="register_form.email" />
+							v-model="registerForm.email" />
 						<input 
 							type="password" 
 							class="form-control my-3"
 							placeholder="Password" 
-							v-model="register_form.password" />
+							v-model="registerForm.password" />
 
 						<input 
 							type="text" 
 							class="form-control my-3"
 							placeholder="Business Name" 
-							v-model="register_form.businessName" />
+							v-model="registerForm.businessName" />
 						</div>
 						<button class="btn btn-large col-12" type="submit">
 							<h2 class="mb-0">Sign Up</h2>
@@ -82,18 +82,20 @@
 
 <script>
 import { ref } from 'vue'
-import { useStore } from 'vuex'
+import { useAuthStore } from '../store/auth';
+
 export default {
 	setup () {
-		const register_form = ref({});
-		const store = useStore();
+		const registerForm = ref({});
+		const authStore = useAuthStore();
 
 		const register = () => {
-			store.dispatch('register', register_form.value);
+			authStore.signUp(registerForm.value)
 		}
 
 		return {
-			register_form,
+			authStore,
+			registerForm,
 			register
 		}
 	}

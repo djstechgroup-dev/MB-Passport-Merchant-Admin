@@ -27,14 +27,14 @@ const routes = [
     name: 'Home',
     component: Home,
     children: [
-      {path: '', component: HomeCards},
-      {path: 'settings', component: Settings},
-      {path: 'alldeals', component: AllDeals},
-      {path: 'newdeal', component: NewDeal},
-      {path: 'individualpage', component: IndividualPage},
-      {path: 'newbusiness' , component: NewBusiness},
-      {path: 'editbusiness' , component: EditBusiness},
-      {path: 'editlocation', component: EditLocation}
+      {path: '/', component: HomeCards},
+      {path: '/settings', component: Settings},
+      {path: '/alldeals', component: AllDeals},
+      {path: '/newdeal', component: NewDeal},
+      {path: '/individualpage', component: IndividualPage},
+      {path: '/newbusiness' , component: NewBusiness},
+      {path: '/editbusiness' , component: EditBusiness},
+      {path: '/editlocation', component: EditLocation}
 
     ],
     meta: {
@@ -46,11 +46,11 @@ const routes = [
     name: 'AdminHome',
     component: AdminHome,
     children: [
-      {path: '', component: AdminHomeCards},
-      {path: 'adminalldeals', component: AdminAllDeals},
-      {path: 'adminallbusiness', component: AdminAllBusiness},
-      {path: 'adminsettings', component: Settings},
-      {path: 'admindealoftheday', component: AdminDealOfTheDay}
+      {path: '/', component: AdminHomeCards},
+      {path: '/adminalldeals', component: AdminAllDeals},
+      {path: '/adminallbusiness', component: AdminAllBusiness},
+      {path: '/adminsettings', component: Settings},
+      {path: '/admindealoftheday', component: AdminDealOfTheDay}
     ],
     meta: {
       requiresAuth: true
@@ -85,16 +85,24 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
 
-  const session = localStorage.getItem('session') || ''
+  const authStore = useAuthStore()
 
-  if (to.path === '/login' && session) {
-      next('/')
-      return
-  }
+  const auth = await authStore.fetchAuthUser()
 
-  if(to.matched.some(rec => rec.meta.requiresAuth) && !session) {
-    next('/login')
-    return
+  if(auth) {
+
+    const role = auth.user.role
+
+    if (to.path.includes('/admin') && role === 0) {
+      return next()
+    } else if(to.path.includes('/admin') && role === 1) {
+      return next('/')
+    }
+
+    
+
+  } else {
+    return next('/login')
   }
 
   next()
