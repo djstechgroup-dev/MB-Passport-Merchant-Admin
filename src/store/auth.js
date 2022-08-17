@@ -36,6 +36,7 @@ export const useAuthStore = defineStore('auth', {
             const {email, password, firstName, lastName, businessName } = data
 
             try {
+
               const response = await axios.post('auth/signup', {email, password, firstName, lastName, businessName}, {
                 withCredentials: true
               })
@@ -116,16 +117,19 @@ export const useAuthStore = defineStore('auth', {
         async fetchAuthUser () {
 
             try {
-                const {data} = await axios.get('auth/user', {
+                const response = await axios.get('auth/user', {
                     withCredentials: true
                 })
 
-                if(data.user) {
-                    this.user = data.user 
-                    return data
+                console.log(response.data)
+
+                if(response.data) {
+                    this.user = response.data.user 
+                    return response.data
                 } else {
                     this.user = null
                     return null
+
                 }
                 
             } catch (error) {

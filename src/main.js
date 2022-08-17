@@ -7,6 +7,8 @@ import './interceptors/axios'
 
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
+
+import Business from './components/Business'
 //import store from './store'
 // import { library } from '@fortawesome/fontawesome-svg-core'
 // import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -14,6 +16,7 @@ import '@vuepic/vue-datepicker/dist/main.css'
 // library.add(faUserSecret)
 const app = createApp(App)
 app.component('Datepicker', Datepicker)
+app.component('Business', Business)
 app.use(pinia)
 app.use(router)
 app.mount('#app')

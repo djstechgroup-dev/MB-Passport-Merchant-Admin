@@ -23,6 +23,19 @@ export const useBusinessStore = defineStore('business', {
             } catch (error) {
                 console.log(error)
             }
+        },
+        async getBusiness() {
+            try {
+                const response = await axios.get('merchant/my-business', {
+                    withCredentials: true
+                })
+                
+                console.log(response)
+
+                router.push('/')
+            } catch (error) {
+                console.log(error)
+            }
         }
     }
 }) 

@@ -89,23 +89,20 @@ router.beforeEach(async (to, from, next) => {
 
   const auth = await authStore.fetchAuthUser()
 
-  if(auth) {
+  const session = localStorage.getItem('session')
 
-    const role = auth.user.role
+  if(to.path === '/login' && session) {
+    next('/')
+    return
+  }
 
-    if (to.path.includes('/admin') && role === 0) {
-      return next()
-    } else if(to.path.includes('/admin') && role === 1) {
-      return next('/')
-    }
-
-    
-
-  } else {
-    return next('/login')
+  if(to.matched.some(rec => rec.meta.requiresAuth) && !session) {
+    next('/login')
+    return
   }
 
   next()
+
 })
 
 export default router
