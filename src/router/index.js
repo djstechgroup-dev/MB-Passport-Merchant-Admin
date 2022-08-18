@@ -12,6 +12,7 @@ import ForgotPassword from '../views/ForgotPassword.vue'
 import CreateNewPassword from  '../views/Create-Password.vue'
 import NewBusiness from '../views/NewBusiness.vue'
 import EditBusiness from '../views/EditBusiness.vue'
+import NewLocation from '../views/NewLocation.vue'
 import EditLocation from '../views/EditLocation.vue'
 import AdminAllDeals from '../views/admin/AdminAllDeals.vue'
 import AdminDealOfTheDay from '../views/admin/AdminDealOfTheDay.vue'
@@ -34,6 +35,7 @@ const routes = [
       {path: '/individualpage', component: IndividualPage},
       {path: '/newbusiness' , component: NewBusiness},
       {path: '/editbusiness' , component: EditBusiness},
+      {path: '/newlocation' , component: NewLocation},
       {path: '/editlocation', component: EditLocation}
 
     ],

@@ -30,12 +30,28 @@ export const useBusinessStore = defineStore('business', {
                     withCredentials: true
                 })
                 
-                console.log(response)
+                return response.data
 
-                router.push('/')
             } catch (error) {
                 console.log(error)
             }
-        }
+        },
+
+        async addLocation(data) {
+
+            console.log(data)
+            
+            // try {
+            //     const response = await axios.post('business/add-location', data, {
+            //         withCredentials: true
+            //     })
+                
+            //     console.log(response)
+
+            //     router.push('/')
+            // } catch (error) {
+            //     console.log(error)
+            // }
+        },
     }
 }) 

@@ -1,7 +1,10 @@
 <template>
     <main>
         <div class="d-flex justify-content-around align-items-center p-2">
-            <button class="btn">+ Add Location</button>
+            <router-link to="newlocation">
+                <button class="btn">+ Add Location</button>
+            </router-link>
+            
             <h1>The Alabama Theatre</h1>
             <div>
                 <router-link to="editlocation">
