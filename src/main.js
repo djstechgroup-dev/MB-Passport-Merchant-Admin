@@ -5,10 +5,11 @@ import {createPinia} from 'pinia'
 const pinia = createPinia()
 import './interceptors/axios'
 
-import Datepicker from '@vuepic/vue-datepicker';
+import Datepicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
 
 import Business from './components/Business'
+import FormNewLocation from './components/FormNewLocation'
 //import store from './store'
 // import { library } from '@fortawesome/fontawesome-svg-core'
 // import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -17,6 +18,7 @@ import Business from './components/Business'
 const app = createApp(App)
 app.component('Datepicker', Datepicker)
 app.component('Business', Business)
+app.component('FormNewLocation', FormNewLocation)
 app.use(pinia)
 app.use(router)
 app.mount('#app')

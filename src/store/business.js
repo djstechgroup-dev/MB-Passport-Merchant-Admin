@@ -24,13 +24,27 @@ export const useBusinessStore = defineStore('business', {
                 console.log(error)
             }
         },
+
         async getBusiness() {
             try {
                 const response = await axios.get('merchant/my-business', {
                     withCredentials: true
                 })
                 
-                return response.data
+                return response.data.business
+
+            } catch (error) {
+                console.log(error)
+            }
+        },
+
+        async getBusinessById(id) {
+            try {
+                const response = await axios.get(`merchant/my-business/${id}`, {
+                    withCredentials: true
+                })
+                
+                return response.data.business
 
             } catch (error) {
                 console.log(error)
@@ -39,19 +53,16 @@ export const useBusinessStore = defineStore('business', {
 
         async addLocation(data) {
 
-            console.log(data)
-            
-            // try {
-            //     const response = await axios.post('business/add-location', data, {
-            //         withCredentials: true
-            //     })
+            try {
+                const response = await axios.post('business/add-location', data, {
+                    withCredentials: true
+                })
                 
-            //     console.log(response)
-
-            //     router.push('/')
-            // } catch (error) {
-            //     console.log(error)
-            // }
+                console.log(response)
+                router.push('/individualpage')
+            } catch (error) {
+                console.log(error)
+            }
         },
     }
 }) 

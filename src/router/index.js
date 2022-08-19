@@ -35,7 +35,7 @@ const routes = [
       {path: '/individualpage', component: IndividualPage},
       {path: '/newbusiness' , component: NewBusiness},
       {path: '/editbusiness' , component: EditBusiness},
-      {path: '/newlocation' , component: NewLocation},
+      {path: '/newlocation/:bid' , component: NewLocation},
       {path: '/editlocation', component: EditLocation}
 
     ],

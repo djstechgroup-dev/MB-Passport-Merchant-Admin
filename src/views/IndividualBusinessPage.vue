@@ -1,20 +1,12 @@
 <template>
-    <Business />
+<Suspense>
+    <template #default>
+        <Business />
+    </template>
+
+    <template #fallback>
+        <div>Loading....</div>
+    </template>
+</Suspense>
+    
 </template>
-
-<script>
-
-    import { useBusinessStore } from '../store/business'
-
-    export default {
-        setup() {
-            const businessStore = useBusinessStore()
-
-            const getBusiness = async () => {
-                await businessStore.getBusiness()
-            }
-
-            getBusiness()
-        }
-    }
-</script>
