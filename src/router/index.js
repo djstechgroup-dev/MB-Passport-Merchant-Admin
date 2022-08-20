@@ -85,22 +85,29 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach((to, from, next) => {
 
-  const authStore = useAuthStore()
+  //const session = localStorage.getItem('session')
 
-  const auth = await authStore.fetchAuthUser()
+  if(to.matched.some(rec => rec.meta.requiresAuth)) {
 
-  const session = localStorage.getItem('session')
+    auth.onAuthStateChanged(async user => {
+      if(user) {
+        const decoded = await user.getIdTokenResult()
+        const isAdmin = true
 
-  if(to.path === '/login' && session) {
-    next('/')
-    return
-  }
-
-  if(to.matched.some(rec => rec.meta.requiresAuth) && !session) {
-    next('/login')
-    return
+        if(isAdmin) {
+          next({name: 'AdminHome'})
+        } else {
+          next({name: 'Home'})
+        }
+      } else {
+        next('/login')
+      }
+    })
+    
+  } else {
+    next({name: 'Login'})
   }
 
   next()

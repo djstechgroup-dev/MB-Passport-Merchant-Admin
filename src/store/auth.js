@@ -85,14 +85,17 @@ export const useAuthStore = defineStore('auth', {
                 const {data} = await axios.post('auth/signin', {email}, {
                     withCredentials: true
                 })
+
+                console.log('firebase response - ', response)
+                console.log('api response - ', data)
                 
-                localStorage.setItem('session', data.token)
+                // localStorage.setItem('session', data.token)
 
-                const user = data?.user
+                // const user = data?.user
 
-                this.user = user
+                // this.user = user
 
-                router.push('/')
+                // router.push('/')
 
             } catch (error) {
               console.log(error)
@@ -101,6 +104,8 @@ export const useAuthStore = defineStore('auth', {
         async signOut() {
             
             try {
+
+                await signOut(auth)
                 const {data} = await axios.post('auth/signout', {
                     withCredentials: true
                 })
@@ -114,27 +119,46 @@ export const useAuthStore = defineStore('auth', {
                 console.log(error)
             }
         },
-        async fetchAuthUser () {
+        // async fetchAuthUser () {
 
-            try {
-                const response = await axios.get('auth/user', {
-                    withCredentials: true
-                })
+        //     try {
+        //         const response = await axios.get('auth/user', {
+        //             withCredentials: true
+        //         })
 
-                console.log(response.data)
+        //         console.log(response.data)
 
-                if(response.data) {
-                    this.user = response.data.user 
-                    return response.data
-                } else {
-                    this.user = null
-                    return null
+        //         if(response.data) {
+        //             this.user = response.data.user 
+        //             return response.data
+        //         } else {
+        //             this.user = null
+        //             return null
 
-                }
+        //         }
                 
-            } catch (error) {
-                console.log(error)
-            }
+        //     } catch (error) {
+        //         console.log(error)
+        //     }
+        // }
+        fetchAuthUser () {
+            auth.onAuthStateChanged(async user => {
+
+                const decoded = await user.getIdTokenResult()
+
+                console.log(decoded.claims)
+
+                if(!user) {
+                    this.user = null
+                    localStorage.removeItem('session')
+                } else {
+
+                    const token = await user.getIdToken()
+
+                    this.user = user
+                    localStorage.setItem('session', token)
+                }
+            })
         }
     }
 }) 
