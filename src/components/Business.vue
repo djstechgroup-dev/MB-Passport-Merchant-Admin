@@ -1,6 +1,6 @@
 <template>
     <main>
-        <BusinessItem v-for="business in businesses" :business="business" ref="businesses" />
+        <BusinessItem v-for="business in businesses" :business="business" :key="business._id" ref="businesses" />
     </main>
 </template>
 

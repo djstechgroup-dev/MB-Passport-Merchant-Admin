@@ -22,6 +22,11 @@ import AdminAllBusiness from '../views/admin/AdminAllBusiness.vue'
 import { useAuthStore } from '../store/auth'
 import {auth} from './../firebase'
 
+const USER_ROLE = {
+  Admin: 0,
+  Merchant: 1
+}
+
 const routes = [
   {
     path: '/',
@@ -40,7 +45,8 @@ const routes = [
 
     ],
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
+      authorize: []
     }
   },  
   {
@@ -49,13 +55,14 @@ const routes = [
     component: AdminHome,
     children: [
       {path: '/', component: AdminHomeCards},
-      {path: '/adminalldeals', component: AdminAllDeals},
-      {path: '/adminallbusiness', component: AdminAllBusiness},
-      {path: '/adminsettings', component: Settings},
-      {path: '/admindealoftheday', component: AdminDealOfTheDay}
+      {path: 'adminalldeals', component: AdminAllDeals},
+      {path: 'adminallbusiness', component: AdminAllBusiness},
+      {path: 'adminsettings', component: Settings},
+      {path: 'admindealoftheday', component: AdminDealOfTheDay}
     ],
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
+      authorize: [USER_ROLE.Admin]
     }
   },
   {
@@ -88,26 +95,27 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
 
   //const session = localStorage.getItem('session')
+  const {authorize} = to.meta
+  const currentUser = {
+    email: 'email@email.com',
+    role: 1
+  }
 
   if(to.matched.some(rec => rec.meta.requiresAuth)) {
 
-    auth.onAuthStateChanged(async user => {
-      if(user) {
-        const decoded = await user.getIdTokenResult()
-        const isAdmin = true
+    if(authorize) {
 
-        if(isAdmin) {
-          next({name: 'AdminHome'})
-        } else {
-          next({name: 'Home'})
-        }
-      } else {
-        next('/login')
+      if(!currentUser) {
+        return next({path: '/login'})
       }
-    })
+
+      if(authorize.length && !authorize.includes(currentUser.role)) {
+        return next({path: '/'})
+      }
+    }
     
   } else {
-    next({name: 'Login'})
+    return next({path: '/login'})
   }
 
   next()

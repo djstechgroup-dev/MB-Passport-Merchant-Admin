@@ -144,10 +144,6 @@ export const useAuthStore = defineStore('auth', {
         fetchAuthUser () {
             auth.onAuthStateChanged(async user => {
 
-                const decoded = await user.getIdTokenResult()
-
-                console.log(decoded.claims)
-
                 if(!user) {
                     this.user = null
                     localStorage.removeItem('session')

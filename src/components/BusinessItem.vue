@@ -22,7 +22,7 @@
 
                 <div v-if="business.locations.length === 0">No location for this business, please add location</div>
 
-                <div v-for="location in business.locations" class="mx-2">
+                <div v-for="location in business.locations" :key="location._id" class="mx-2">
 
                     <div class="d-flex justify-content-center align-items-end my-2 w-100">
                         <div class="mr-4">{{location.name}}</div>
