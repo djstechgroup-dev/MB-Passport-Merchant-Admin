@@ -20,11 +20,10 @@ import AdminHome from '../views/admin/AdminHome.vue'
 import AdminHomeCards from '../views/admin/AdminHomeCards.vue'
 import AdminAllBusiness from '../views/admin/AdminAllBusiness.vue'
 import { useAuthStore } from '../store/auth'
-import {auth} from './../firebase'
 
 const USER_ROLE = {
-  Admin: 0,
-  Merchant: 1
+  Admin: 'admin',
+  Merchant: 'merchant'
 }
 
 const routes = [
@@ -46,7 +45,7 @@ const routes = [
     ],
     meta: {
       requiresAuth: true,
-      authorize: []
+      authorize: USER_ROLE.Merchant
     }
   },  
   {
@@ -62,7 +61,7 @@ const routes = [
     ],
     meta: {
       requiresAuth: true,
-      authorize: [USER_ROLE.Admin]
+      authorize: USER_ROLE.Admin
     }
   },
   {
@@ -94,29 +93,29 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
 
-  //const session = localStorage.getItem('session')
   const {authorize} = to.meta
-  const currentUser = {
-    email: 'email@email.com',
-    role: 1
+
+  const {isAuthenticated, userRole} = useAuthStore()
+
+  if((to.path === '/login' || to.path === '/register') && isAuthenticated) {
+    return next({path: '/'})
   }
 
   if(to.matched.some(rec => rec.meta.requiresAuth)) {
 
-    if(authorize) {
-
-      if(!currentUser) {
+      if(!isAuthenticated) {
         return next({path: '/login'})
       }
 
-      if(authorize.length && !authorize.includes(currentUser.role)) {
+      if(authorize !== userRole && to.path === '/admin') {
         return next({path: '/'})
       }
-    }
+
+      if(authorize !== userRole && to.path !== '/admin') {
+        return next({path: '/admin'})
+      }
     
-  } else {
-    return next({path: '/login'})
-  }
+  } 
 
   next()
 

@@ -11,22 +11,19 @@ import {auth} from './../firebase'
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
-        user: null
+        user: {
+            role: 0
+        }
     }),
     getters: {
-        permission(state) {
+        userRole(state) {
 
-            if(state.user) {
-                const role = state.user.role
+            if(state.user.role === 0) return 'admin'
 
-                if(role === 0) return 'admin'
-                else return 'merchant'                
-            } else {
-                return 'user'
-            }
+            return 'merchant'
 
         },
-        isAuth(state) {
+        isAuthenticated(state) {
             return state.user !== null
         }
     },
@@ -142,19 +139,23 @@ export const useAuthStore = defineStore('auth', {
         //     }
         // }
         fetchAuthUser () {
-            auth.onAuthStateChanged(async user => {
 
-                if(!user) {
-                    this.user = null
-                    localStorage.removeItem('session')
-                } else {
+            this.user = {
+                role: 0
+            }
+            // auth.onAuthStateChanged(async user => {
 
-                    const token = await user.getIdToken()
+            //     if(!user) {
+            //         this.user = null
+            //         localStorage.removeItem('session')
+            //     } else {
 
-                    this.user = user
-                    localStorage.setItem('session', token)
-                }
-            })
+            //         const token = await user.getIdToken()
+
+            //         this.user = user
+            //         localStorage.setItem('session', token)
+            //     }
+            // })
         }
     }
 }) 
