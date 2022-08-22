@@ -1,4 +1,4 @@
-# yt
+# Merchant business/Admin
 
 ## Project setup
 ```
