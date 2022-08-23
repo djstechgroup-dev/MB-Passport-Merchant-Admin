@@ -91,6 +91,7 @@ export const useAuthStore = defineStore('auth', {
                 router.push(this.redirectLink)
 
               } catch (error) {
+                console.log(error)
                 switch(error.code) {
                   case 'auth/user-not-found':
                     this.error = 'Invalid credentials'

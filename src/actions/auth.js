@@ -65,7 +65,6 @@ const googleSignIn = async () => {
         const response = await axios.post('auth/signin', {
             email: firebaseResponse.user.email
         }, { withCredentials: true})
-
         if(response?.data) {
             return response?.data
         } else {

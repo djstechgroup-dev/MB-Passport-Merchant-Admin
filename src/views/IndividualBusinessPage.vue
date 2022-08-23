@@ -1,6 +1,5 @@
 <template>
     <main>
-        {{businesses}}
         <BusinessItem v-for="business in businesses" :business="business" :key="business._id" />
     </main>
 </template>

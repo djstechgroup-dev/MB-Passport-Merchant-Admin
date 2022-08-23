@@ -20,7 +20,6 @@ import AdminHome from '../views/admin/AdminHome.vue'
 import AdminHomeCards from '../views/admin/AdminHomeCards.vue'
 import AdminAllBusiness from '../views/admin/AdminAllBusiness.vue'
 import { useAuthStore } from '../store/auth'
-//import store from './../store'
 
 const USER_ROLE = {
   Admin: 'admin',
