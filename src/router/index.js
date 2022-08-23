@@ -20,6 +20,7 @@ import AdminHome from '../views/admin/AdminHome.vue'
 import AdminHomeCards from '../views/admin/AdminHomeCards.vue'
 import AdminAllBusiness from '../views/admin/AdminAllBusiness.vue'
 import { useAuthStore } from '../store/auth'
+//import store from './../store'
 
 const USER_ROLE = {
   Admin: 'admin',
@@ -94,7 +95,6 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
 
   const {authorize} = to.meta
-
   const {isAuthenticated, userRole} = useAuthStore()
 
   if((to.path === '/login' || to.path === '/register') && isAuthenticated) {
@@ -114,6 +114,7 @@ router.beforeEach((to, from, next) => {
       if(authorize !== userRole && to.path !== '/admin') {
         return next({path: '/admin'})
       }
+
     
   } 
 

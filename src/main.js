@@ -1,24 +1,23 @@
 import { createApp } from 'vue'
+import {createPinia} from 'pinia'
 import App from './App.vue'
 import router from './router'
-import {createPinia} from 'pinia'
-const pinia = createPinia()
-import './interceptors/axios'
-
+import { useAuthStore } from './store/auth'
 import Datepicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
+import './interceptors/axios'
 
-import Business from './components/Business'
-import FormNewLocation from './components/FormNewLocation'
-//import store from './store'
-// import { library } from '@fortawesome/fontawesome-svg-core'
-// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-// import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
-// library.add(faUserSecret)
+const pinia = createPinia()
 const app = createApp(App)
-app.component('Datepicker', Datepicker)
-app.component('Business', Business)
-app.component('FormNewLocation', FormNewLocation)
 app.use(pinia)
-app.use(router)
-app.mount('#app')
+const store = useAuthStore()
+
+store.init().then((authUser) => {
+
+    console.log(authUser)
+    
+    app.component('Datepicker', Datepicker)
+    app.use(router)
+    app.mount('#app')    
+})
+

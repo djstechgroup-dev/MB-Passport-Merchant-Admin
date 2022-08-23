@@ -11,14 +11,12 @@ import {auth} from './../firebase'
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
-        user: {
-            role: 0
-        }
+        user: null
     }),
     getters: {
         userRole(state) {
 
-            if(state.user.role === 0) return 'admin'
+            if(state.user?.role === 0) return 'admin'
 
             return 'merchant'
 
@@ -138,24 +136,37 @@ export const useAuthStore = defineStore('auth', {
         //         console.log(error)
         //     }
         // }
-        fetchAuthUser () {
+        init() {
+            return new Promise(resolve => {
+                auth.onAuthStateChanged(async user => {
+                    try {
+                        if(!user) throw new Error
 
-            this.user = {
-                role: 0
-            }
-            // auth.onAuthStateChanged(async user => {
+                        const token = await user.getIdToken()
+                        localStorage.setItem('session', token)
+                            
+                        const response = await axios.get('auth/user', {
+                            withCredentials: true,
+                            headers: {
+                                'Authorization': `Bearer ${token}`
+                            }
+                        })
+    
+                        const resUser = response?.data?.user
 
-            //     if(!user) {
-            //         this.user = null
-            //         localStorage.removeItem('session')
-            //     } else {
+                        if(!resUser) throw new Error
+    
+                        this.user = resUser
+                        
+                    } catch (error) {
+                        this.user = null
+                        localStorage.removeItem('session')
+                    }
 
-            //         const token = await user.getIdToken()
-
-            //         this.user = user
-            //         localStorage.setItem('session', token)
-            //     }
-            // })
+                    resolve(this.user)
+                })
+            })
+        
         }
     }
 }) 

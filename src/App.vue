@@ -2,24 +2,7 @@
   <router-view/>
 </template>
 
-<script>
-import { onBeforeMount } from 'vue'
-import { useAuthStore } from './store/auth'
-import {auth} from './firebase'
-
-export default {
-
-  setup() {
-
-    const authStore = useAuthStore()
-
-    onBeforeMount(() => {
-      authStore.fetchAuthUser()
-    })
-
-  }
-
-}
+<script setup>
 </script>
 
 <style>
