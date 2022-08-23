@@ -35,14 +35,14 @@
 							type="text" 
 							class="form-control my-3 "
 							placeholder="First Name"
-							v-model="registerForm.firstName" />
+							v-model="registerForm.firstname" />
 						</div>
 						<div class="col">
 						<input 
 							type="text" 
 							class="form-control my-3"
 							placeholder="Last Name"
-							v-model="registerForm.lastName" />
+							v-model="registerForm.lastname" />
 						</div>
 					</div>
 					<div>

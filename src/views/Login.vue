@@ -31,14 +31,26 @@
 					</div>
 					<form class="form-group m-auto col-md-8" @submit.prevent="login">
 						<div>
-							<input type="email" class="form-control my-3" placeholder="Email address"
-								v-model="loginForm.email" />
-							<input type="password" class="form-control my-3" placeholder="Password"
-								v-model="loginForm.password" />
+							<input 
+							type="email" 
+							class="form-control my-3" 
+							placeholder="Email address"
+							required 
+							v-model="loginForm.email" />
+
+							<input 
+							type="password" 
+							class="form-control my-3" 
+							placeholder="Password"
+							required
+							v-model="loginForm.password" />
 						</div>
 						<button class="btn btn-large col-12" type="submit">
 							<h2 class="mb-0">Sign In</h2>
 						</button>
+
+						<div v-if="error" class="error">{{error}}</div>
+
 						<div class="pt-3">
 							<router-link to="/forgot-password">
 								<p>I forgot my password</p>
@@ -49,9 +61,6 @@
 						</div>
 					</form>
 
-					<div>
-						<button @click="logout">LOGOUT</button>
-					</div>
 				</div>
 			</div>
 			<div class="col-md-4">
@@ -72,20 +81,24 @@ export default {
 
 		const authStore = useAuthStore()
 
+		const error = ref('')
+
 		const loginForm = ref({
 			email: '',
 			password: ''
 		})
 
-		const login = () => {
+		const login = async () => {
 			const {email, password} = loginForm.value
-			authStore.signIn(email, password)
+			const res = await authStore.signIn(email, password)
+			error.value = res
 		}
 
 		return {
 			authStore,
 			loginForm,
-			login
+			login,
+			error
 		}
 	}
 }
@@ -130,5 +143,13 @@ export default {
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
+}
+
+.error {
+	padding: 5px;
+	border-radius: 5px;
+	background-color: rgb(253, 208, 208);
+	border: 2px solid rgb(255, 91, 91);
+	margin-top: 10px;
 }
 </style>

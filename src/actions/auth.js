@@ -1,36 +1,93 @@
+import axios from 'axios'
+import { 
+    signInWithPopup, 
+    GoogleAuthProvider,
+    signInWithEmailAndPassword,
+    signOut 
+  } from 'firebase/auth'
+import {auth} from './../firebase'
 
-export const signup = async user => {
+const signUp = async data => {
 
-    console.log(user)
+    const {email, password, firstName, lastName, businessName } = data
 
     try {
-        const result = await fetch(`http://localhost:8000/api/auth/signup`, {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(user)
+        const response = await axios.post('auth/signup', {
+            email, 
+            password, 
+            firstName, 
+            lastName, 
+            businessName
+        }, {
+            withCredentials: true
         })
-        
-        const data = await result.json()
-        return data
+      
+      if(response?.data) {
+        return response.data
+      } else {
+        return null
+      }
+
+    } catch (error) {
+      throw error
+    }
+}
+
+const signIn = async data => {
+    try {
+        const {email, password} = data
+
+        console.log('signing in ,', data )
+        const firebaseResponse = await signInWithEmailAndPassword(auth, email, password)
+        //const token = await firebaseResponse.user.getIdToken()
+        const response = await axios.post('auth/signin', {
+            email: firebaseResponse.user.email
+        }, {withCredentials: true})
+
+        if(response?.data) {
+            return response?.data
+        } else {
+            return null
+        }
+    }catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
+const googleSignIn = async () => {
+
+    const provider = new GoogleAuthProvider()
+
+    try {
+        const firebaseResponse = await signInWithPopup(auth, provider)
+        //const token = await firebaseResponse.user.getIdToken()
+        const response = await axios.post('auth/signin', {
+            email: firebaseResponse.user.email
+        }, { withCredentials: true})
+
+        if(response?.data) {
+            return response?.data
+        } else {
+            return null
+        }
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
+const logout = async () => {
+    try {
+        await signOut(auth)
     } catch (error) {
         throw error
     }
 }
 
-export const signin = email => {
-    return fetch(`http://localhost:8000/api/auth/signin`, {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({email})
-    }).then(response => {
-        return response.json();
-    }).catch(err => {
-        throw err
-    })
+export default {
+    signUp,
+    signIn,
+    googleSignIn,
+    logout
 }

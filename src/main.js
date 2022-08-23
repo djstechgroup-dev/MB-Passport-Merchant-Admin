@@ -12,12 +12,9 @@ const app = createApp(App)
 app.use(pinia)
 const store = useAuthStore()
 
-store.init().then((authUser) => {
-
-    console.log(authUser)
-    
+store.init().then(() => {
     app.component('Datepicker', Datepicker)
     app.use(router)
-    app.mount('#app')    
+    app.mount('#app')
 })
 
