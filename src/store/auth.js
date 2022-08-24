@@ -118,7 +118,7 @@ export const useAuthStore = defineStore('auth', {
 
                         const token = await user.getIdToken()
                         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-                            
+        
                         const response = await axios.get('auth/user', {
                             withCredentials: true
                         })
@@ -130,6 +130,7 @@ export const useAuthStore = defineStore('auth', {
                         this.user = resUser
                         
                     } catch (error) {
+                        console.log(error)
                         this.user = null
                         this.error = error.message
                     }
