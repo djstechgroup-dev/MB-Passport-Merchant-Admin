@@ -5,7 +5,7 @@
                 <div>
                 <h1>Deal Of the Day</h1>
                     <p><u>Select day to view / edit</u></p>
-                    <datepicker v-model="picked"  />
+                    <!-- <datepicker v-model="picked"  /> -->
                 </div>
 			</div>
 			<div class="col-md d-flex justify-content-center align-items-center py-5">
@@ -55,7 +55,6 @@
 </template>
 
 <script setup>
-import Datepicker from 'vue3-datepicker'
 import { ref } from 'vue'
 const picked = ref(new Date())
 </script>

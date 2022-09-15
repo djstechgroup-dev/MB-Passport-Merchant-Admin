@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+  }
+  
+  #nav {
+    padding: 30px;
+  }
+  
+  #nav a {
+    font-weight: bold;
+    color: #2c3e50;
+  }
+  
+  #nav a.router-link-exact-active {
+    color: #42b983;
+  }
+
+  .btn {
+    border: none;
+    border-radius: 5px;
+    background-color: #0D47AA !important;
+    color: white !important;
+  }
+
+  
+  .btn:hover {
+    background-color: #447fe5 !important;
+  }
+
+  .btn-icon {
+    padding: 8px;
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+}
+
+.btn-icon:not(last) {
+    margin-right: 5px;
+}
+
+.btn-icon:hover {
+    background-color: #9abcf7;
+}

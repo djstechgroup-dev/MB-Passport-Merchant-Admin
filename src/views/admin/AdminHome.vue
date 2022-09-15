@@ -1,124 +1,79 @@
 <template>
-  <main class="container-fluid" style="overflow: hidden;">
-      <div class="row border-nav">
-        <div class="col-3 border-ver">
-          <div class="p-3">
-            <img src="..\..\assets\blueMBlogo.jpeg" alt="Paris" style="height: 50%; width: 50%;">
-          </div>
-        </div>
-        <div class="col-9">
-          <div className="row p-5">
-              <div className="col-md">
-                  <div className="card card-bg">
-                      <div className="card-body">
-                          <span class="display-1">12</span>
-                          <h5 className="card-title">Deals Active</h5>
-                      </div>
-                  </div>
-              </div>
-              <div className="col-md">
-                  <div className="card card-bg">
-                      <div className="card-body">
-                          <span class="display-1">409</span>
-                          <h5 className="card-title">Deals Saved</h5>
-                      </div>
-                  </div>
-              </div>
-              <div className="col-md">
-                  <div className="card card-bg">
-                      <div className="card-body">
-                        <span class="display-1">100</span>
-                          <h5 className="card-title">Deals Used</h5>
-                      </div>
-                  </div>
-              </div>
+  <div class="text-center" style="background-color: #ffd75b; padding: 5px 0">
+    <h1>Admin View</h1>
+  </div>
+  <main>
+    <div class="row p-2">
+      <div class="col-sm-4">
+        <div class="card border-0">
+          <div class="card-body text-center">
+            <img src="@\assets\deal.png" alt="Paris" />
+            <h5 class="card-title pt-3">View All Active Deals</h5>
+            <hr class="hr-login" />
+            <p>Manage current deals and view your deal history</p>
           </div>
         </div>
       </div>
-    <div class="">
-        <div class="row">
-            <div class="col-3 border-ver" style="background-color: #FFD75B;">
-              <div class="border-bar pt-2">
-                <router-link to="/admin"><h3>Home</h3></router-link>
-              </div>
-              <div class="border-bar pt-2">
-                <h3>New Deal</h3>
-              </div>
-              <div class="border-bar pt-2">
-                <router-link to="/admin/adminalldeals"><h3>Manage All Deals</h3></router-link>
-              </div>
-               <div class="border-bar pt-2">
-                <router-link to="/admin/adminallbusiness"><h3>Manage All Business</h3></router-link>
-              </div>
-              <div class="border-bar pt-2">
-                <router-link to="/admin/AdminDealOfTheDay"><h3>Deal Of The Day</h3></router-link>
-              </div>
-            
-              <div class="border-bar pt-2">
-                <router-link to="/admin/adminsettings"><h3>Settings</h3></router-link>
-              </div>
-              <div class="border-bar pt-2">
-                <h3>Help</h3>
-              </div>
-                  <div class="border-bar pt-2 " style="height: 50px;"/>
-              <div class="border-bar pt-2 " style="height: 50px;"/> 
-              <div class="border-bar pt-2 " style="height: 50px;"/>
-               <div class="border-bar pt-2 " style="height: 50px;"/>
-               <div class="border-bar pt-2">
-                <h3>Logout</h3>
-              </div>
-            </div>
-            <div class="col-9" style="text-align: justify; padding: none;">
-          <router-view></router-view>
-            </div>
+      <div class="col-sm-4">
+        <div class="card border-0">
+          <div class="card-body text-center">
+            <img src="@\assets\business.png" alt="Paris" />
+            <h5 class="card-title pt-3">Manage All Businesses</h5>
+            <hr class="hr-login" />
+            <p>Edit business information, Activate Merchants</p>
+          </div>
         </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="card border-0">
+          <div class="card-body text-center">
+            <img src="@\assets\star.png" alt="Paris" />
+            <h5 class="card-title pt-3">Deal of the Day</h5>
+            <hr class="hr-login" />
+            <p>Manage deal of the day information</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row p-2">
+      <div class="col-sm-4">
+        <div class="card border-0">
+          <div class="card-body text-center">
+            <img src="@\assets\settings.png" alt="Paris" />
+            <a href="/settings"><h5 class="card-title pt-3">Settings</h5></a>
+            <hr class="hr-login" />
+            <p>Manage password, Privacy Policy, Terms of Services</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="card border-0">
+          <div class="card-body text-center">
+            <img src="@\assets\resources.png" alt="Paris" />
+            <h5 class="card-title pt-3">Chamber Resources</h5>
+            <hr class="hr-login" />
+            <p>Resources provided by the Myrtle Beach Chamber of Commerce</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="card border-0">
+          <div class="card-body text-center">
+            <img src="@\assets\help.png" alt="Paris" />
+            <h5 class="card-title pt-3">Help</h5>
+            <hr class="hr-login" />
+            <p>FAQ, Live Chat,Contact Information</p>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 </template>
 
-<script>
-import { useAuthStore } from '../../store/auth';
-import router from './../../router'
-
-export default {
-  data() {
-    return {
-    }
-  },
-  methods: {
-  },
-  created() {
-    const authStore = useAuthStore()
-    const permission = authStore.permission
-
-    if(permission == 'merchant') router.push('/')
-
-    console.log(permission)
-  }
-}
-</script>
-
 <style>
-.main {
-	height: 100vh;
-}
-.card-bg{
-	background-color: #0D47AA;
-  color: white;
-  border-radius: 10px;
-}
-.border-nav{
-  border-bottom: 5px solid black;
-}
-.border-bar{
-  border-bottom: 3px solid black;
-}
-.border-ver{
-  border-right: 5px solid black;
-  padding: 0;
-}
-.hr-login{
-	padding: 2px ;
-	background-color: black !important;
+.hr-login {
+  padding: 2px;
+  background-color: black !important;
 }
 </style>

@@ -1,20 +1,24 @@
 import { createApp } from 'vue'
-import {createPinia} from 'pinia'
-import App from './App.vue'
-import router from './router'
-import { useAuthStore } from './store/auth'
-import Datepicker from '@vuepic/vue-datepicker'
+import axios from 'axios'
+import App from '@/App.vue'
+import router from '@/router'
+import {auth} from '@/firebase'
+import '@/interceptors/axios'
+import '@/assets/main.css'
 import '@vuepic/vue-datepicker/dist/main.css'
-import './interceptors/axios'
 
-const pinia = createPinia()
-const app = createApp(App)
-app.use(pinia)
-const store = useAuthStore()
+let app
 
-store.init().then(() => {
-    app.component('Datepicker', Datepicker)
-    app.use(router)
-    app.mount('#app')
+auth.onAuthStateChanged(async (user) => {
+    if(user) {
+        const token = await user.getIdToken()
+        // console.log('token - ', token)
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    }
+
+    if(!app) {
+        app = createApp(App)
+        app.use(router)
+        app.mount('#app')
+    }
 })
-

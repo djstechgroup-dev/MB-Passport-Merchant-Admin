@@ -1,15 +1,17 @@
 import {ref} from 'vue'
-import { firebaseStorage } from '../firebase'
+import { storage } from '@/firebase'
+import authService from '@/services/auth.service'
 
 const useStorage = () => {
     const filePath = ref(null)
     const error = ref(null)
     const url = ref(null)
 
-    const uploadBusinessPhoto = async (file) => {
-        console.log(file)
-        filePath.value = `business/sdad123123sadassas/${file.name}`
-        const storageRef = firebaseStorage.ref(filePath.value)
+    const uploadBusinessPhoto = async (firestorePath, file) => {
+
+        const authUser = await authService.getAuthUser()
+        filePath.value = `${firestorePath}/${authUser.user_id}/${file.name}`
+        const storageRef = storage.ref(filePath.value)
 
         try {
             const res = await storageRef.put(file)

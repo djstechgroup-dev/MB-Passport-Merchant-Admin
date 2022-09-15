@@ -84,46 +84,46 @@
 <script>
 import { useRoute } from 'vue-router'
 import {ref} from 'vue'
-import {useBusinessStore} from './../store/business'
+//import {useBusinessStore} from './../store/business'
 
 export default {
 
-    async setup() {
-        const route = useRoute()
-        const businessStore = useBusinessStore()
-        const business = ref({})
+    setup() {
+        // const route = useRoute()
+        // const businessStore = useBusinessStore()
+        // const business = ref({})
 
-        const formData = ref({
-            name: '',
-            address: '',
-            info: '',
-            placeholder: '',
-            imageUrl: '',
-            openingTime: {
-                hours: new Date().getHours(),
-                minutes: new Date().getMinutes()
-            },
-            closingTime: {
-                hours: new Date().getHours(),
-                minutes: new Date().getMinutes()
-            }
-        })
+        // const formData = ref({
+        //     name: '',
+        //     address: '',
+        //     info: '',
+        //     placeholder: '',
+        //     imageUrl: '',
+        //     openingTime: {
+        //         hours: new Date().getHours(),
+        //         minutes: new Date().getMinutes()
+        //     },
+        //     closingTime: {
+        //         hours: new Date().getHours(),
+        //         minutes: new Date().getMinutes()
+        //     }
+        // })
 
-        business.value = await businessStore.getBusinessById(route.params.bid)
+        // business.value = await businessStore.getBusinessById(route.params.bid)
         
 
-        const addLocation = () => {
-            businessStore.addLocation({
-                ...formData.value,
-                businessId: business.value._id
-            })
-        }
+        // const addLocation = () => {
+        //     businessStore.addLocation({
+        //         ...formData.value,
+        //         businessId: business.value._id
+        //     })
+        // }
 
-        return {
-            formData,
-            business,
-            addLocation
-        }
+        // return {
+        //     formData,
+        //     business,
+        //     addLocation
+        // }
     }
 }
 

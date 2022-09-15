@@ -1,17 +1,22 @@
 import {ref} from 'vue'
 import businessService from '@/services/business.service'
+import authService from '@/services/auth.service'
 
 const data = ref(null)
 const error = ref(null)
 const loading = ref(false)
 
-const addLocation = () => {
+const addDeal = () => {
 
     const add = async (payload) => {
 
         try {
             loading.value = true
-            const res = await businessService.addLocation(payload)
+            const user = await authService.getAuthUser()
+            const res = await businessService.addBusinessDeal({
+                user: user._id,
+                ...payload
+            })
             data.value = res
             loading.value = false
             error.value = null
@@ -28,4 +33,4 @@ const addLocation = () => {
     }
 }
 
-export default addLocation
+export default addDeal

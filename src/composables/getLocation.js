@@ -5,12 +5,12 @@ const data = ref(null)
 const error = ref(null)
 const loading = ref(false)
 
-const getBusiness = (id) => {
+const getLocation = (id) => {
 
-    const fetchBusiness = async () => {
+    const fetchLocation = async () => {
         try {
             loading.value = true
-            const response = await businessService.getBusinessById(id)
+            const response = await businessService.getLocationById(id)
             data.value = response
             loading.value = false
         } catch (err) {
@@ -20,7 +20,7 @@ const getBusiness = (id) => {
         }
     }
 
-    return {fetchBusiness, data, error, loading}
+    return {fetchLocation, data, error, loading}
 }
 
-export default getBusiness
+export default getLocation

@@ -1,8 +1,5 @@
 <template>
   <main>
-    <div class="text-center" style="background-color: #ffd75b; padding: 5px 0">
-      <h1>Admin - Manage All Deals</h1>
-    </div>
     <div class="d-flex p-3 my-4">
       <div class="px-3">
         <select class="select-action">
@@ -99,29 +96,21 @@
 </template>
 
 <script>
-import { ref, computed, watch, watchEffect } from "vue";
-import useAdmin from "@/composables/useAdmin";
+import { ref, computed, watchEffect } from "vue";
+import useMerchant from "@/composables/useMerchant";
+import deleteDeal from "@/composables/deleteDeal";
+import useCounter from "@/composables/useCounter";
 
 export default {
   setup() {
     const items = ref([]);
     const loading = ref(false);
-    const { fetchDeals, deals } = useAdmin();
+    const { getAllDeals, deals } = useMerchant();
+    const { removeDeal } = deleteDeal();
+    const { loadCounter } = useCounter();
 
     const groupBy = ref("deal");
 
-    // const handleDelete = async (id) => {
-    //   const isConfirmed = confirm("Are you sure?");
-
-    //   if (isConfirmed) {
-    //     await removeDeal(id);
-    //     await getAllDeals();
-    //     await loadCounter();
-    //     alert("Deal successfully deleted!");
-    //   }
-
-    //   return;
-    // };
     const filteredDeals = computed(() => {
       return deals.value.map((deal) => {
         const from = new Date(deal.active_from);
@@ -130,27 +119,44 @@ export default {
         const from_date = `${from.getUTCMonth()}/${from.getUTCDate()}/${from.getFullYear()}`;
         const to_date = `${to.getUTCMonth()}/${to.getUTCDate()}/${to.getFullYear()}`;
 
-        return {
+        const d = {
           id: deal._id,
           deal: deal.tagline,
           business: deal.businessId.businessName,
           status: deal.active ? "Active" : "Inactive",
           campaign_dates: `${from_date} - ${to_date}`,
         };
+
+        return d;
       });
     });
 
+    const handleDelete = async (id) => {
+      const isConfirmed = confirm("Are you sure?");
+
+      if (isConfirmed) {
+        await removeDeal(id);
+        await getAllDeals();
+        await loadCounter();
+        alert("Deal successfully deleted!");
+      }
+
+      return;
+    };
+
     watchEffect(async () => {
       loading.value = true;
-      await fetchDeals();
-      console.log(items.value);
+      await getAllDeals();
       loading.value = false;
     });
 
     return {
+      items,
       filteredDeals,
       groupBy,
       loading,
+      deals,
+      handleDelete,
     };
   },
 };

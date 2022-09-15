@@ -1,7 +1,8 @@
 import axios from 'axios'
-import {auth} from './../firebase'
+import {auth} from '@/firebase'
 
 axios.defaults.baseURL = 'http://localhost:8000/api/'
+axios.defaults.withCredentials = true
 
 let refresh = false
 

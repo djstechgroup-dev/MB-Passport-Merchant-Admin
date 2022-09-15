@@ -13,13 +13,9 @@
     "axios": "^0.27.2",
     "core-js": "^3.23.5",
     "firebase": "^9.9.0",
-    "mande": "^2.0.3",
-    "pinia": "^2.0.18",
     "v-md-date-range-picker": "^2.6.0",
     "vue": "^3.2.37",
-    "vue-router": "^4.1.2",
-    "vue3-datepicker": "^0.3.4",
-    "vuex": "^4.0.2"
+    "vue-router": "^4.1.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.8",
