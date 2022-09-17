@@ -77,7 +77,7 @@
                 style="background-color: #0d47aa; color: white; width: 100%"
               >
                 <div
-                  v-for="location in locations"
+                  v-for="location in optionLocations"
                   class="form-check"
                   style="border-bottom: 1px solid #fff"
                   :key="location.id"
@@ -149,7 +149,11 @@
         </tr>
 
         <tr>
-          <td colspan="2" class="p-0">
+          <td
+            v-if="businessId && optionLocations.length"
+            colspan="2"
+            class="p-0"
+          >
             <template v-if="isValidate">
               <button v-if="loading" disabled class="btn-save">
                 LOADING...
@@ -161,6 +165,13 @@
                 SAVE
               </button>
             </template>
+          </td>
+          <td
+            v-else
+            colspan="2"
+            class="p-0"
+          >
+            <div class="no-business-location">No location found on this business</div>
           </td>
         </tr>
       </tbody>
@@ -196,7 +207,9 @@ export default {
     const { file, filePreview, handleChange, clearFile } = useUpload();
 
     const { uploadBusinessPhoto, filePath, url } = useStorage();
-    const {loadCounter} = useCounter()
+    const { loadCounter } = useCounter();
+
+    const optionLocations = ref([]);
 
     const formData = ref({
       tagline: "",
@@ -211,33 +224,38 @@ export default {
     const onChange = async (e) => {
       businessId.value = e.target.value;
       await getLocations(businessId.value);
+      optionLocations.value = locations.value;
     };
 
     const createDeal = async () => {
-      loading.value = true;
+      if (businessId.value) {
+        loading.value = true;
 
-      let photoUrl = null;
-      let photoFilePath = null;
+        let photoUrl = null;
+        let photoFilePath = null;
 
-      if (file.value) {
-        const firestorePath = "covers/deals";
-        await uploadBusinessPhoto(firestorePath, file.value);
-        photoUrl = url.value;
-        photoFilePath = filePath.value;
+        if (file.value) {
+          const firestorePath = "covers/deals";
+          await uploadBusinessPhoto(firestorePath, file.value);
+          photoUrl = url.value;
+          photoFilePath = filePath.value;
+        }
+
+        await add({
+          ...formData.value,
+          businessId: businessId.value,
+          imageUrl: photoUrl,
+          imagePath: photoFilePath,
+        });
+
+        await loadCounter();
+
+        loading.value = false;
+        clearFile();
+        router.push({ name: "merchant-deals" });
+      } else {
+        alert("Please select business to add deals");
       }
-
-      await add({
-        ...formData.value,
-        businessId: businessId.value,
-        imageUrl: photoUrl,
-        imagePath: photoFilePath,
-      });
-
-      await loadCounter();
-
-      loading.value = false;
-      clearFile();
-      router.push({ name: "merchant-deals" });
     };
 
     watch(formData.value, () => {
@@ -256,6 +274,7 @@ export default {
       if (data.value.length > 0) {
         businessId.value = data.value[0]._id;
         await getLocations(businessId.value);
+        optionLocations.value = locations.value;
       }
     });
 
@@ -263,6 +282,7 @@ export default {
       businessId,
       filePreview,
       locations,
+      optionLocations,
       data,
       isLoading,
       loading,
@@ -350,5 +370,13 @@ input[type="radio"]:checked + label {
 .cover-photo-img {
   width: 100%;
   height: 100%;
+}
+
+.no-business-location {
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgb(255, 59, 59);
+  background: rgb(255, 175, 175);
+  padding: 10px 0;
 }
 </style>
