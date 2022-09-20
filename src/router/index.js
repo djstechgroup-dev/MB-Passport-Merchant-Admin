@@ -47,7 +47,7 @@ const authMiddleware = async (to, from, next) => {
       const res = await authService.getAuthUser()
       userRole = res.role
   } catch (error) {
-    console.log(error)
+    //console.log(error)
   }
 
   if((to.path === '/login' || to.path === '/register') && user) {
@@ -188,7 +188,7 @@ const routes = [
     children: [
       {
         name: 'admin-home',
-        path: '', 
+        path: '/admin', 
         component: Dashboard,
         meta: {
           display: true,
@@ -197,29 +197,29 @@ const routes = [
       },
       {
         name: 'admin-deals',
-        path: 'deals', 
+        path: '/admin/deals', 
         component: AdminAllDeals,
         meta: {
           display: true,
-          label: 'Home'
+          label: 'Manage All Deals'
         }
       },
       {
         name: 'admin-business',
-        path: 'business', 
+        path: '/admin/business', 
         component: AdminAllBusiness,
         meta: {
           display: true,
-          label: 'Home'
+          label: 'Manage All Business'
         }
       },
       {
         name: 'admin-settings',
-        path: 'settings', 
+        path: '/admin/settings', 
         component: AdminDealOfTheDay,
         meta: {
           display: true,
-          label: 'Home'
+          label: 'Settings'
         }
       }
     ],

@@ -12,9 +12,8 @@ let app
 auth.onAuthStateChanged(async (user) => {
     if(user) {
         const token = await user.getIdToken()
-        console.log('token - ', token)
-        console.log('user - ', user)
-        
+        // console.log('token - ', token)
+        // console.log('user - ', user)
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
     }
 

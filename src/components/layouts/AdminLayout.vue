@@ -1,5 +1,6 @@
 <template>
-  <main class="container-fluid" style="overflow: hidden">
+  <main class="container-fluid" >
+
     <div class="row border-nav">
       <div class="col-3 border-ver">
         <div class="p-3">
@@ -39,50 +40,68 @@
         </div>
       </div>
     </div>
-    <div class="">
-      <div class="row">
-        <div class="col-3 border-ver" style="background-color: #ffd75b">
-          <div class="border-bar pt-2">
-            <router-link to="/admin"><h3>Home</h3></router-link>
-          </div>
-          <div class="border-bar pt-2">
-            <router-link to="/admin/deals"
-              ><h3>Manage All Deals</h3></router-link
-            >
-          </div>
-          <div class="border-bar pt-2">
-            <router-link to="/admin/business"
-              ><h3>Manage All Business</h3></router-link
-            >
-          </div>
 
-          <div class="border-bar pt-2">
-            <router-link to="/admin/settings"
-              ><h3>Settings</h3></router-link
-            >
-          </div>
-          <div class="border-bar pt-2" style="height: 50px" />
-          <div class="border-bar pt-2" style="height: 50px" />
-          <div class="border-bar pt-2" style="height: 50px" />
-          <div class="border-bar pt-2" style="height: 50px" />
-          <div class="border-bar pt-2">
-            <h3>Logout</h3>
-          </div>
+    <div class="row">
+
+        <div class="col-3 border-ver" style="background-color: #ffd75b">
+          <Nav :routes="routes" />
         </div>
-        <div class="col-9 p-0" style="text-align: justify; padding: none !important">
-          <router-view></router-view>
+
+        <div 
+        class="col-9 p-0" 
+        style="text-align: justify; padding: none !important;;"
+        >
+          <router-view />
         </div>
-      </div>
+
     </div>
   </main>
 </template>
 
 <script>
-export default {};
+import { ref, watch, watchEffect, computed } from "vue";
+import useCounter from "@/composables/useCounter";
+import Nav from "@/components/Nav.vue";
+import router from '@/router'
+
+export default {
+  components: {
+    Nav,
+  },
+  setup() {
+    const loading = ref(false);
+    const { loadCounter, deals, activeDeals, usedDeals } = useCounter();
+
+    const routes = computed(() => {
+      const adminRoutes = router.options.routes.filter(item => item.name === 'admin')[0]
+      return adminRoutes.children.filter(item => item.meta.display)
+    })
+
+    watch([deals, activeDeals, usedDeals], async () => {
+      loading.value = true;
+      await loadCounter();
+      loading.value = false;
+    });
+
+    watchEffect(async () => {
+      loading.value = true;
+      await loadCounter();
+      loading.value = false;
+    });
+
+    return {
+      deals,
+      activeDeals,
+      usedDeals,
+      loading,
+      routes
+    };
+  },
+};
 </script>
 
-<style>
-.main {
+<style scoped>
+main {
   height: 100vh;
 }
 .card-bg {

@@ -7,17 +7,17 @@
 					<h2 class="heading-login">Forgot Your Password</h2>
 					<p class="para-login">Enter your email below and we will send you a link to create a new password.</p>
 				</div>
-				<form class="form-group m-auto col-md-8">
+				
 					<div>
 						<input 
 							type="email" 
 							class="form-control my-3"
-							placeholder="Email address" />
+							placeholder="Email address"
+							v-model="email" />
 						</div>
-						<button class="btn btn-large col-12" type="submit">
+						<button class="btn btn-large col-12" type="submit" @click="resetPassword">
 							<h2 class="mb-0">Send Link</h2>
 						</button>
-				</form>
 				</div>
 			</div>
 			<div class="col-md-4">
@@ -28,6 +28,28 @@
 	</main>
 </template>
 
+<script>
+	import {ref} from 'vue'
+	import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+
+	export default {
+		setup() {
+
+			const auth = getAuth()
+			const email = ref('')
+
+			const resetPassword = async () => {
+				const res = await sendPasswordResetEmail(auth, email.value)
+				console.log(res)
+			}
+
+			return {
+				email,
+				resetPassword
+			}
+		}
+	}
+</script>
 
 <style>
 .main {

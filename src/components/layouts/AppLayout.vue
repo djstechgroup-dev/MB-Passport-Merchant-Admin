@@ -43,7 +43,7 @@
 
     <div class="row" style="">
       <div class="col-3 border-ver">
-        <Nav />
+        <Nav :routes="routes" />
       </div>
 
       <div class="col-9" style="text-align: justify">
@@ -54,9 +54,10 @@
 </template>
 
 <script>
-import { ref, watch, watchEffect } from "vue";
+import { ref, watch, watchEffect, computed } from "vue";
 import useCounter from "@/composables/useCounter";
 import Nav from "@/components/Nav.vue";
+import router from '@/router';
 
 export default {
   components: {
@@ -65,6 +66,11 @@ export default {
   setup() {
     const loading = ref(false);
     const { loadCounter, deals, activeDeals, usedDeals } = useCounter();
+
+    const routes = computed(() => {
+      const merchantRoutes = router.options.routes.filter(item => item.name === 'merchant')[0]
+      return merchantRoutes.children.filter(item => item.meta.display)
+    })
 
     watch([deals, activeDeals, usedDeals], async () => {
       loading.value = true;
@@ -83,6 +89,7 @@ export default {
       activeDeals,
       usedDeals,
       loading,
+      routes
     };
   },
 };

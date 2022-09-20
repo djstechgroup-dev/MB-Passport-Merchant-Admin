@@ -2,7 +2,7 @@
 
     <nav>
         <div style="flex: 1;">
-            <div v-for="route in navRoutes" :key="route.name" class="nav-item">
+            <div v-for="route in routes" :key="route.name" class="nav-item">
                 <router-link :to="route.path">
                     <span>{{route.meta.label}}</span>
                 </router-link>
@@ -11,7 +11,7 @@
         
 
         <div class="nav-logout">
-            <button class="btn-logout" v-if="isLaoding" disabled>Loading...</button>
+            <button class="btn-logout" v-if="isLoading" disabled>Loading...</button>
             <button class="btn-logout" v-else @click="logout">LOGOUT</button>
         </div>
     </nav>
@@ -19,19 +19,14 @@
 </template>
 
 <script>
-import {computed} from 'vue'
-import useSignout from '../composables/useSignout'
-import router from './../router'
+import useSignout from '@/composables/useSignout'
+import router from '@/router'
 
 export default {
-    setup() {
+    props: ['routes'],
+    setup({routes}) {
 
-        const {isLaoding, error, signOut} = useSignout()
-
-        const navRoutes = computed(() => {
-            const merchantRoutes = router.options.routes.filter(item => item.name === 'merchant')[0]
-            return merchantRoutes.children.filter(item => item.meta.display)
-        })
+        const {isLoading, error, signOut} = useSignout()
 
         const logout = async () => {
 
@@ -41,15 +36,13 @@ export default {
                 await signOut()
                 router.push('/login')
             }
-
             return
-            
         }
 
         return {
-            navRoutes,
+            routes,
             logout,
-            isLaoding,
+            isLoading,
             error
         }
     }
