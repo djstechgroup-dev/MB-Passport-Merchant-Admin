@@ -50,9 +50,41 @@
                     <td><h4>Operating Hours</h4></td>
                     <td style="width: 600px">                    
                         <div class="timerangepicker">
-                            <TimePicker v-model="formData.openingTime" />
-                            TO
-                            <TimePicker v-model="formData.closingTime" />
+                            <div class="day-time-picker">
+                                <select class="day-selector" v-model="formData.openingTime.day">
+                                    <option value="Sunday">Sunday</option>
+                                    <option value="Monday">Monday</option>
+                                    <option value="Tuesday">Tuesday</option>
+                                    <option value="Wenesday">Wenesday</option>
+                                    <option value="Thursday">Thursday</option>
+                                    <option value="Friday">Friday</option>
+                                    <option value="Saturday">Saturday</option>
+                                </select>
+
+                                <TimePicker 
+                                inputClassName="dp-custom-input" 
+                                hideInputIcon 
+                                v-model="formData.openingTime.time" />
+                            </div>
+
+                            -
+
+                            <div class="day-time-picker">
+                                <select class="day-selector" v-model="formData.closingTime.day">
+                                    <option value="Sunday">Sunday</option>
+                                    <option value="Monday">Monday</option>
+                                    <option value="Tuesday">Tuesday</option>
+                                    <option value="Wenesday">Wenesday</option>
+                                    <option value="Thursday">Thursday</option>
+                                    <option value="Friday">Friday</option>
+                                    <option value="Saturday">Saturday</option>
+                                </select>
+
+                                <TimePicker 
+                                inputClassName="dp-custom-input" 
+                                hideInputIcon 
+                                v-model="formData.closingTime.time" />
+                            </div>
                         </div>
                     </td>
                 </tr>
@@ -125,8 +157,9 @@ import useStorage from '@/composables/useStorage'
 import useUpload from '@/composables/useUpload'
 import addBusiness from '@/composables/addBusiness'
 import useFormValidation from '@/composables/useFormValidation'
-import TimePicker from '@/components/TimePicker.vue'
 import useCategory from '@/composables/useCategory'
+
+import TimePicker from '../../components/TimePicker.vue'
 
 export default {
     components: {
@@ -143,14 +176,20 @@ export default {
             description: '',
             websiteUrl: '',
             openingTime: {
-                hours: new Date().getHours(),
-                minutes: new Date().getMinutes(),
-                seconds: new Date().getSeconds()
+                day: 'Sunday',
+                time: {
+                    hours: new Date().getHours(),
+                    minutes: new Date().getMinutes(),
+                    seconds: new Date().getSeconds()
+                }
             },
             closingTime: {
-                hours: new Date().getHours(),
-                minutes: new Date().getMinutes(),
-                seconds: new Date().getSeconds()
+                day: 'Saturday',
+                time: {
+                    hours: new Date().getHours(),
+                    minutes: new Date().getMinutes(),
+                    seconds: new Date().getSeconds()
+                }
             }
         })
         const loading = ref(false)
@@ -240,73 +279,75 @@ export default {
 
 </script>
 
-<style>
-.input {
-    width:100%; 
-    padding: 5px;
-}
+<style scoped>
 
-.btn-save {
-    border: none;
-    outline: none;
-    background-color: #C3F9D1;
-    text-align: center;
-    cursor: pointer;
-    padding: 10px;
-    width: 100%;
-}
 
-.btn-save:hover {
-    background-color: #82ffa3;
-}
+    .timerangepicker {
+        display: flex; 
+        justify-content: space-between; 
+        align-items: baseline;
+        gap: 10px;
+    }
+    .input {
+        width:100%; 
+        padding: 5px;
+    }
 
-.btn-upload {
-    border: none;
-    outline: none;
-    background-color: #C3F9D1;
-    text-align: center;
-    cursor: pointer;
-    padding: 10px;
-    width: 100%;
-}
+    .btn-save {
+        border: none;
+        outline: none;
+        background-color: #C3F9D1;
+        text-align: center;
+        cursor: pointer;
+        padding: 10px;
+        width: 100%;
+    }
 
-.btn-upload:hover {
-    background-color: #82ffa3;
-}
+    .btn-save:hover {
+        background-color: #82ffa3;
+    }
 
-.timerangepicker {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: baseline;
-}
+    .btn-upload {
+        border: none;
+        outline: none;
+        background-color: #C3F9D1;
+        text-align: center;
+        cursor: pointer;
+        padding: 10px;
+        width: 100%;
+    }
 
-.cover-photo-card {
-    border-radius: 5px;
-    width: 100%;
-    height: 160px;
-}
+    .btn-upload:hover {
+        background-color: #82ffa3;
+    }
 
-.cover-photo-img {
-    width: 100%;
-    height: 100%;
-}
+    .cover-photo-card {
+        border-radius: 5px;
+        width: 100%;
+        height: 160px;
+    }
 
-.error {
-	padding: 5px;
-	border-radius: 5px;
-	background-color: rgb(253, 208, 208);
-	border: 2px solid rgb(255, 91, 91);
-	margin-top: 10px;
-    text-align: center;
-}
+    .cover-photo-img {
+        width: 100%;
+        height: 100%;
+    }
 
-.no-photo {
-    padding: 10px;
-    border: 1px solid black;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 180px;
-}
+    .error {
+        padding: 5px;
+        border-radius: 5px;
+        background-color: rgb(253, 208, 208);
+        border: 2px solid rgb(255, 91, 91);
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .no-photo {
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 180px;
+    }
 </style>

@@ -25,7 +25,7 @@
             </div>
         </div>
                     
-        <div class="card p-3" style="width: 18rem; height: 330px; border-color: black;">
+        <div class="card p-3" style="width: 19rem; height: 320px; border-color: black;">
                             
             <img
             v-if="location.imageUrl"
@@ -63,8 +63,10 @@
                 let from = new Date()
                 let to = new Date()
 
-                const openingTime = location.openingTime
-                const closingTime = location.closingTime
+                const openingDay = location.openingTime.day
+                const openingTime = location.openingTime.time
+                const closingTime = location.closingTime.time
+                const closingDay = location.closingTime.day
 
                 from.setHours(openingTime.hours, openingTime.minutes, openingTime.seconds)
                 to.setHours(closingTime.hours, closingTime.minutes, closingTime.seconds)
@@ -78,7 +80,7 @@
                 let opening = (_opening > 12) ? _opening - 12 : _opening
                 let closing = (_closing > 12) ? _closing - 12 : _closing
 
-                return `Monday ${opening} ${openingMeridiem}-${closing} ${closingMeridiem}`
+                return `${openingDay} ${opening}${openingMeridiem} to ${closingDay} ${closing}${closingMeridiem}`
             })
 
             return {

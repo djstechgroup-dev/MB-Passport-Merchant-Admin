@@ -1,11 +1,14 @@
 <template>
-    <Datepicker 
-    timePicker 
-    :value="time"
-    :clearable="false" 
-    :is24="false"
-    @update:modelValue="handleTime" 
-    />
+
+        <Datepicker 
+        inputClassName="dp-custom-input"
+        timePicker 
+        :value="time"
+        :clearable="false" 
+        :is24="false"
+        @update:modelValue="handleTime" 
+        />
+    
 </template>
 
 <script>
@@ -19,7 +22,7 @@ export default {
     components: {
         Datepicker
     },
-    setup(props) {
+    setup() {
 
         const time = ref({
             hours: new Date().getHours(),
@@ -37,3 +40,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.dp-custom-input {
+    border-color: transparent;
+}
+</style>

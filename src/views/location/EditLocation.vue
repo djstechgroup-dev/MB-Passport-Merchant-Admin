@@ -60,9 +60,41 @@
                         <td><h4>Operating Hours</h4></td>
                         <td style="width: 450px;">
                             <div class="timerangepicker">
-                                <TimePicker v-model="formData.openingTime" />
-                                TO
-                                <TimePicker v-model="formData.closingTime" />  
+                                <div class="day-time-picker">
+                                    <select class="day-selector" v-model="formData.openingTime.day">
+                                        <option value="Sunday">Sunday</option>
+                                        <option value="Monday">Monday</option>
+                                        <option value="Tuesday">Tuesday</option>
+                                        <option value="Wenesday">Wenesday</option>
+                                        <option value="Thursday">Thursday</option>
+                                        <option value="Friday">Friday</option>
+                                        <option value="Saturday">Saturday</option>
+                                    </select>
+
+                                    <TimePicker 
+                                    inputClassName="dp-custom-input" 
+                                    hideInputIcon 
+                                    v-model="formData.openingTime.time" />
+                                </div>
+
+                                -
+
+                                <div class="day-time-picker">
+                                    <select class="day-selector" v-model="formData.closingTime.day">
+                                        <option value="Sunday">Sunday</option>
+                                        <option value="Monday">Monday</option>
+                                        <option value="Tuesday">Tuesday</option>
+                                        <option value="Wenesday">Wenesday</option>
+                                        <option value="Thursday">Thursday</option>
+                                        <option value="Friday">Friday</option>
+                                        <option value="Saturday">Saturday</option>
+                                    </select>
+
+                                    <TimePicker 
+                                    inputClassName="dp-custom-input" 
+                                    hideInputIcon 
+                                    v-model="formData.closingTime.time" />
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -143,14 +175,20 @@ export default {
             address: '',
             info: '',
             openingTime: {
-                hours: new Date().getHours(),
-                minutes: new Date().getMinutes(),
-                seconds: new Date().getSeconds()
+                day: 'Sunday',
+                time: {
+                    hours: new Date().getHours(),
+                    minutes: new Date().getMinutes(),
+                    seconds: new Date().getSeconds()
+                }
             },
             closingTime: {
-                hours: new Date().getHours(),
-                minutes: new Date().getMinutes(),
-                seconds: new Date().getSeconds()
+                day: 'Saturday',
+                time: {
+                    hours: new Date().getHours(),
+                    minutes: new Date().getMinutes(),
+                    seconds: new Date().getSeconds()
+                }
             },
             placeholder: '',
             imageUrl: '',

@@ -3,6 +3,24 @@
     padding: 0;
     box-sizing: border-box;
   }
+
+  .dp__input {
+    border: none !important;
+  }
+
+  .day-time-picker {
+    display: flex; 
+    border: 1px solid gray; 
+    padding: 0 5px;
+  }
+
+  .day-selector {
+      border: none;
+      outline: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+  }
+
   #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
