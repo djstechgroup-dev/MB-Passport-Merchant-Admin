@@ -253,8 +253,8 @@ export default {
           locations: dealLocations,
         } = deal.value;
 
-        await getBusiness(businessId);
-        await getLocations(businessId);
+        await getBusiness(businessId._id);
+        await getLocations(businessId._id);
 
         formData.value.tagline = tagline;
         formData.value.date_range = [active_from, active_to];

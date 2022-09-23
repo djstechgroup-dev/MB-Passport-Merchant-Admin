@@ -25,7 +25,7 @@
             </div>
         </div>
                     
-        <div class="card p-3" style="width: 19rem; height: 320px; border-color: black;">
+        <div class="card p-3" style="width: 20rem; height: 350px; border-color: black;">
                             
             <img
             v-if="location.imageUrl"
