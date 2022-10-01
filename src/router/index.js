@@ -47,7 +47,7 @@ const authMiddleware = async (to, from, next) => {
       const res = await authService.getAuthUser()
       userRole = res.role
   } catch (error) {
-    //console.log(error)
+    console.log(error)
   }
 
   if((to.path === '/login' || to.path === '/register') && user) {

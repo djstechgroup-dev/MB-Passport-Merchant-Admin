@@ -17,7 +17,9 @@ auth.onAuthStateChanged(async (user) => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
     }
 
+
     if(!app) {
+
         app = createApp(App)
         app.use(router)
         app.mount('#app')

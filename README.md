@@ -1,24 +1,41 @@
-# Merchant business/Admin
+# MYRTLE BEACH PASSPORT WEB APP
 
-## Project setup
-```
-npm install
-```
+This is the Admin and Merchant Web App of Myrtle Beach Passport
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Requirements
 
-### Compiles and minifies for production
-```
-npm run build
-```
+- Vue 3
+- Firebase v9
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Features
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Admin/Merchant Page
+- Email & Password Authentication
+- Google Authentication
+- Business CRUD Operations
+- Deals CRUD Operations
+- Business Location CRUD Operations
+- Pause & Unpause Deals
+
+## Tech Stack
+
+This project uses a number of open source projects to work properly:
+
+- Vue 3
+- Firebase
+- Axios
+
+## Installation
+
+Install the dependencies and devDependencies and start the server.
+`npm install` or `yarn`
+
+## Available Scripts
+
+In the project directory, you can run:
+
+`npm run serve` to start development mode
+
+`npm run build` to build the project in production
+
+`npm run lint` to lint the project

@@ -5,7 +5,11 @@
                 <div>
                 <h1>Deal Of the Day</h1>
                     <p><u>Select day to view / edit</u></p>
-                    <!-- <datepicker v-model="picked"  /> -->
+
+                    <div class="_datepicker">
+                        <Datepicker inline autoApply />
+                    </div>
+                    
                 </div>
 			</div>
 			<div class="col-md d-flex justify-content-center align-items-center py-5">
@@ -54,7 +58,22 @@
 	</main>
 </template>
 
-<script setup>
+<script>
 import { ref } from 'vue'
-const picked = ref(new Date())
+import Datepicker from '@vuepic/vue-datepicker'
+
+export default {
+    components: {
+        Datepicker
+    },
+    setup() {
+        return {}
+    }
+}
 </script>
+
+<style >
+/* ._datepicker {
+    border: 1px solid rgb(53, 53, 53);
+} */
+</style>
