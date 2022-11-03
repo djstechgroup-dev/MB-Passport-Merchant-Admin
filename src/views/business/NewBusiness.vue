@@ -96,7 +96,7 @@
                         <select 
                         style="width: 100%; padding: 10px; text-align: center;" 
                         v-model="formData.category">
-                            <option value="">Select Category</option>
+                            <option value="test">Select Category</option>
 
                             <option v-for="(category, i) in categories" :key="i" :value="category">
                                 {{category}}

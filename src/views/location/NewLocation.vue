@@ -70,39 +70,152 @@
                         <td style="width: 450px;">
                             <div class="timerangepicker">
                                 <div class="day-time-picker">
-                                    <select class="day-selector" v-model="formData.openingTime.day">
-                                        <option value="Sunday">Sunday</option>
-                                        <option value="Monday">Monday</option>
-                                        <option value="Tuesday">Tuesday</option>
-                                        <option value="Wednesday">Wednesday</option>
-                                        <option value="Thursday">Thursday</option>
-                                        <option value="Friday">Friday</option>
-                                        <option value="Saturday">Saturday</option>
-                                    </select>
+                                    <input class="day-selector" value="Sunday" disabled style="width: 92px;" />
 
                                     <TimePicker 
                                     inputClassName="dp-custom-input" 
                                     hideInputIcon 
-                                    v-model="formData.openingTime.time" />
+                                    v-model="formData.openingTime.Sunday.time" />
                                 </div>
 
                                 -
 
                                 <div class="day-time-picker">
-                                    <select class="day-selector" v-model="formData.closingTime.day">
-                                        <option value="Sunday">Sunday</option>
-                                        <option value="Monday">Monday</option>
-                                        <option value="Tuesday">Tuesday</option>
-                                        <option value="Wednesday">Wednesday</option>
-                                        <option value="Thursday">Thursday</option>
-                                        <option value="Friday">Friday</option>
-                                        <option value="Saturday">Saturday</option>
-                                    </select>
+                                    <input class="day-selector" value="Sunday" disabled style="width: 92px;" />
 
                                     <TimePicker 
                                     inputClassName="dp-custom-input" 
                                     hideInputIcon 
-                                    v-model="formData.closingTime.time" />
+                                    v-model="formData.closingTime.Sunday.time" />
+                                </div>
+                            </div>
+
+                            <div class="timerangepicker">
+                                <div class="day-time-picker">
+                                    <input class="day-selector" value="Monday" disabled style="width: 92px;" />
+
+                                    <TimePicker 
+                                    inputClassName="dp-custom-input" 
+                                    hideInputIcon 
+                                    v-model="formData.openingTime.Monday.time" />
+                                </div>
+
+                                -
+
+                                <div class="day-time-picker">
+                                    <input class="day-selector" value="Monday" disabled style="width: 92px;" />
+
+                                    <TimePicker 
+                                    inputClassName="dp-custom-input" 
+                                    hideInputIcon 
+                                    v-model="formData.closingTime.Monday.time" />
+                                </div>
+                            </div>
+
+                            <div class="timerangepicker">
+                                <div class="day-time-picker">
+                                    <input class="day-selector" value="Tuesday" disabled style="width: 92px;" />
+                                    <TimePicker 
+                                    inputClassName="dp-custom-input" 
+                                    hideInputIcon 
+                                    v-model="formData.openingTime.Tuesday.time" />
+                                </div>
+
+                                -
+
+                                <div class="day-time-picker">
+                                    <input class="day-selector" value="Tuesday" disabled style="width: 92px;" />
+
+                                    <TimePicker 
+                                    inputClassName="dp-custom-input" 
+                                    hideInputIcon 
+                                    v-model="formData.closingTime.Tuesday.time" />
+                                </div>
+                            </div>
+
+                            <div class="timerangepicker">
+                                <div class="day-time-picker">
+                                    <input class="day-selector" value="Wednesday" disabled style="width: 92px;" />
+
+                                    <TimePicker 
+                                    inputClassName="dp-custom-input" 
+                                    hideInputIcon 
+                                    v-model="formData.openingTime.Wednesday.time" />
+                                </div>
+
+                                -
+
+                                <div class="day-time-picker">
+                                    <input class="day-selector" value="Wednesday" disabled style="width: 92px;" />
+                                    <TimePicker 
+                                    inputClassName="dp-custom-input" 
+                                    hideInputIcon 
+                                    v-model="formData.closingTime.Wednesday.time" />
+                                </div>
+                            </div>
+
+                            <div class="timerangepicker">
+                                <div class="day-time-picker">
+                                    <input class="day-selector" value="Thursday" disabled style="width: 92px;" />
+
+                                    <TimePicker 
+                                    inputClassName="dp-custom-input" 
+                                    hideInputIcon 
+                                    v-model="formData.openingTime.Thursday.time" />
+                                </div>
+
+                                -
+
+                                <div class="day-time-picker">
+                                    <input class="day-selector" value="Thursday" disabled style="width: 92px;" />
+
+                                    <TimePicker 
+                                    inputClassName="dp-custom-input" 
+                                    hideInputIcon 
+                                    v-model="formData.closingTime.Thursday.time" />
+                                </div>
+                            </div>
+
+                            <div class="timerangepicker">
+                                <div class="day-time-picker">
+                                    <input class="day-selector" value="Friday" disabled style="width: 92px;" />
+
+                                    <TimePicker 
+                                    inputClassName="dp-custom-input" 
+                                    hideInputIcon 
+                                    v-model="formData.openingTime.Friday.time" />
+                                </div>
+
+                                -
+
+                                <div class="day-time-picker">
+                                    <input class="day-selector" value="Friday" disabled style="width: 92px;" />
+
+                                    <TimePicker 
+                                    inputClassName="dp-custom-input" 
+                                    hideInputIcon 
+                                    v-model="formData.closingTime.Friday.time" />
+                                </div>
+                            </div>
+
+                            <div class="timerangepicker">
+                                <div class="day-time-picker">
+                                    <input class="day-selector" value="Saturday" disabled style="width: 92px;" />
+
+                                    <TimePicker 
+                                    inputClassName="dp-custom-input" 
+                                    hideInputIcon 
+                                    v-model="formData.openingTime.Saturday.time" />
+                                </div>
+
+                                -
+
+                                <div class="day-time-picker">
+                                    <input class="day-selector" value="Saturday" disabled style="width: 92px;" />
+                                    <TimePicker 
+                                    inputClassName="dp-custom-input" 
+                                    hideInputIcon 
+                                    v-model="formData.closingTime.Saturday.time" />
                                 </div>
                             </div>
                         </td>
@@ -186,20 +299,118 @@ export default {
             placeholder: '',
             imageUrl: '',
             openingTime: {
-                day: 'Sunday',
-                time: {
-                    hours: new Date().getHours(),
-                    minutes: new Date().getMinutes(),
-                    seconds: new Date().getSeconds()
-                }
+                Sunday: {
+                    time: {
+                        hours: new Date().getHours(),
+                        minutes: new Date().getMinutes(),
+                        seconds: new Date().getSeconds()
+                    }
+                },
+                Monday: {
+                    time: {
+                        hours: new Date().getHours(),
+                        minutes: new Date().getMinutes(),
+                        seconds: new Date().getSeconds()
+                    }
+                },
+                Tuesday: {
+                    time: {
+                        hours: new Date().getHours(),
+                        minutes: new Date().getMinutes(),
+                        seconds: new Date().getSeconds()
+                    }
+                },
+                Wednesday: {
+                    time: {
+                        hours: new Date().getHours(),
+                        minutes: new Date().getMinutes(),
+                        seconds: new Date().getSeconds()
+                    }
+                },
+                Thursday: {
+                    time: {
+                        hours: new Date().getHours(),
+                        minutes: new Date().getMinutes(),
+                        seconds: new Date().getSeconds()
+                    }
+                },
+                Friday: {
+                    time: {
+                        hours: new Date().getHours(),
+                        minutes: new Date().getMinutes(),
+                        seconds: new Date().getSeconds()
+                    }
+                },
+                Saturday: {
+                    time: {
+                        hours: new Date().getHours(),
+                        minutes: new Date().getMinutes(),
+                        seconds: new Date().getSeconds()
+                    }
+                },
+                // day: 'Sunday',
+                // time: {
+                //     hours: new Date().getHours(),
+                //     minutes: new Date().getMinutes(),
+                //     seconds: new Date().getSeconds()
+                // }
             },
             closingTime: {
-                day: 'Saturday',
-                time: {
-                    hours: new Date().getHours(),
-                    minutes: new Date().getMinutes(),
-                    seconds: new Date().getSeconds()
-                }
+                Sunday: {
+                    time: {
+                        hours: new Date().getHours(),
+                        minutes: new Date().getMinutes(),
+                        seconds: new Date().getSeconds()
+                    }
+                },
+                Monday: {
+                    time: {
+                        hours: new Date().getHours(),
+                        minutes: new Date().getMinutes(),
+                        seconds: new Date().getSeconds()
+                    }
+                },
+                Tuesday: {
+                    time: {
+                        hours: new Date().getHours(),
+                        minutes: new Date().getMinutes(),
+                        seconds: new Date().getSeconds()
+                    }
+                },
+                Wednesday: {
+                    time: {
+                        hours: new Date().getHours(),
+                        minutes: new Date().getMinutes(),
+                        seconds: new Date().getSeconds()
+                    }
+                },
+                Thursday: {
+                    time: {
+                        hours: new Date().getHours(),
+                        minutes: new Date().getMinutes(),
+                        seconds: new Date().getSeconds()
+                    }
+                },
+                Friday: {
+                    time: {
+                        hours: new Date().getHours(),
+                        minutes: new Date().getMinutes(),
+                        seconds: new Date().getSeconds()
+                    }
+                },
+                Saturday: {
+                    time: {
+                        hours: new Date().getHours(),
+                        minutes: new Date().getMinutes(),
+                        seconds: new Date().getSeconds()
+                    }
+                },
+                // day: 'Saturday',
+                // time: {
+                //     hours: new Date().getHours(),
+                //     minutes: new Date().getMinutes(),
+                //     seconds: new Date().getSeconds()
+                // }
             }
         })
 
@@ -309,8 +520,8 @@ export default {
             clearFile()
             await fetchBusiness()
 
-            formData.value.openingTime = business.value.openingTime
-            formData.value.closingTime = business.value.closingTime
+            // formData.value.openingTime = business.value.openingTime
+            // formData.value.closingTime = business.value.closingTime
 
             loading.value = false
         })

@@ -9,9 +9,9 @@
             </h2>
             <h4>Help people discover your business.</h4>
             <p class="para-register">
-              By continuing you agree our to our terms of
+              By continuing you agree our to our <a href='https://docs.google.com/document/d/1jrR4LP5uz2OedPeQwDELIXkOvRZ'>terms of <br> service</a> and <a href='https://docs.google.com/document/d/1_BsAWkykidNoBWjWCDUM3bAqrsJu5bwG/edit?usp=sharing&ouid=111034994932163717721&rtpof=true&sd=true'>privacy policy</a>
             </p>
-            <p class="para-register">service and privacy policy</p>
+            <!-- <p class="para-register">service and privacy policy</p> -->
             <div class="py-3">
               <button class="btn btn-google shadow" @click="googleSignup">
                 <img src="@/assets/google.png" alt="Save icon" />
@@ -71,6 +71,13 @@
                 placeholder="Business Name"
                 v-model="businessName"
               />
+
+              <input
+                type="text"
+                class="form-control my-3"
+                placeholder="Phone Number"
+                v-model="phoneNumber"
+              />
             </div>
             <button class="btn btn-large col-12" type="submit">
               <h2 class="mb-0">Sign Up</h2>
@@ -104,6 +111,7 @@ export default {
     const email = ref("");
     const password = ref("");
     const businessName = ref("");
+    const phoneNumber = ref("");
 
     const error = ref(null);
     const {
@@ -121,7 +129,7 @@ export default {
       error.value = signUpError.value;
     });
 
-    watch([firstname, lastname, email, password, businessName], () => {
+    watch([firstname, lastname, email, password, businessName, phoneNumber], () => {
       resetError();
     });
 
@@ -132,6 +140,7 @@ export default {
         email: email.value,
         password: password.value,
         businessName: businessName.value,
+        phoneNumber: phoneNumber.value
       });
 
       router.push(redirectTo.value);
@@ -148,6 +157,7 @@ export default {
       email,
       password,
       businessName,
+      phoneNumber,
       register,
       googleSignup,
       isLaoding,
