@@ -73,11 +73,11 @@
               />
 
               <input
-                type="text"
-                class="form-control my-3"
-                placeholder="Phone Number"
-                v-model="phoneNumber"
-              />
+                  type="text"
+                  class="form-control my-3"
+                  placeholder="Phone Number"
+                  v-model="phoneNumber"
+                />
             </div>
             <button class="btn btn-large col-12" type="submit">
               <h2 class="mb-0">Sign Up</h2>
@@ -112,6 +112,7 @@ export default {
     const password = ref("");
     const businessName = ref("");
     const phoneNumber = ref("");
+    const countryCode = ref("");
 
     const error = ref(null);
     const {
@@ -140,10 +141,13 @@ export default {
         email: email.value,
         password: password.value,
         businessName: businessName.value,
-        phoneNumber: phoneNumber.value
+        phoneNumber: phoneNumber.value,
       });
-
-      router.push(redirectTo.value);
+      console.log(redirectTo.value)
+      // if(redirectTo.value !== 'ERROR')
+      //   router.push(redirectTo.value);
+      // else
+      //   router.push(redirectTo.value);
     };
 
     const googleSignup = async () => {

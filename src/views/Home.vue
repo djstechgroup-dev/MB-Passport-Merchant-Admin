@@ -49,7 +49,7 @@
             title: 'Help',
             subTitle: 'FAQ, Live Chat,Contact Information',
             icon: 'help.png',
-            path: '/'
+            path: '/help'
           }
         ]
       }

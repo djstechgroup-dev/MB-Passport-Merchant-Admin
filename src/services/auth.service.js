@@ -10,25 +10,31 @@ import {
 import {auth} from '@/firebase'
 
 const signUp = async data => {
+    const response = await axios.post('auth/signup', data)
+    console.log(response)
+    return response
+    // try {
 
-    const {email, password, firstname, lastname } = data
+    //     // const {user} = await createUserWithEmailAndPassword(auth, email, password)
+    //     // if(!user) throw new Error('Could not complete signup')
+    //     // await updateProfile(user, {displayName: `${firstname} ${lastname}`})
 
-    try {
+    //     // console.log(data)
 
-        const {user} = await createUserWithEmailAndPassword(auth, email, password)
-        if(!user) throw new Error('Could not complete signup')
-        await updateProfile(user, {displayName: `${firstname} ${lastname}`})
+    //     const response = await axios.post('auth/signup', data)
+    //     console.log(response)
 
-        const response = await axios.post('auth/signin')
-        const data = response?.data
+    //     return response
+    //     // const data = response?.data
+    //     // console.log(response)
       
-        if(!data) throw new Error('Something went wrong')
+    //     // if(!data) throw new Error('Something went wrong')
 
-        return data
+    //     // return data
 
-    } catch (error) {
-      throw error
-    }
+    // } catch (error) {
+    //   throw error
+    // }
 }
 
 const signIn = async input => {

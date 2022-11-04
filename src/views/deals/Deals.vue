@@ -2,7 +2,7 @@
   <main>
     <div class="d-flex p-3 my-4">
       <div class="px-3">
-        <select class="select-action">
+        <select class="select-action form-control" style="border-width: 1px; border-radius: 8px;">
           <option value="">Actions</option>
           <option value="action#1">Action #1</option>
           <option value="action#2">Action #2</option>
