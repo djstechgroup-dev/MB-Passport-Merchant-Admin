@@ -15,4 +15,11 @@ const getUser = async (id) => {
     }
 }
 
-export default getUser
+const changeUserPassword = async (data) => {
+    // console.log('de la functia pulii - log')
+    // return 'de la functia pulii'
+    const response = await axios.post('change-password', data)
+    return response
+}
+
+export default { getUser, changeUserPassword }

@@ -99,7 +99,7 @@
                             <option value="test">Select Category</option>
 
                             <option v-for="(category, i) in categories" :key="i" :value="category">
-                                {{category}}
+                                {{category.name}}
                             </option>
                         </select>
                 </td>

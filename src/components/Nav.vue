@@ -1,6 +1,6 @@
 <template>
 
-    <nav>
+    <nav style="gap: 60px;">
         <div style="flex: 1;">
             <div v-for="route in routes" :key="route.name" class="nav-item">
                 <router-link :to="route.path">
@@ -12,7 +12,7 @@
 
         <div class="nav-logout">
             <button class="btn-logout" v-if="isLoading" disabled>Loading...</button>
-            <button class="btn-logout" v-else @click="logout">LOGOUT</button>
+            <button class="btn-logout" v-else @click="logout">Sign Out</button>
         </div>
     </nav>
 

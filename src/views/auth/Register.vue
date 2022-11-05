@@ -112,7 +112,6 @@ export default {
     const password = ref("");
     const businessName = ref("");
     const phoneNumber = ref("");
-    const countryCode = ref("");
 
     const error = ref(null);
     const {

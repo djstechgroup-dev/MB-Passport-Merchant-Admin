@@ -113,14 +113,24 @@
         </tr>
 
         <tr>
-          <td><h4>Number of Offers</h4></td>
+          <td>
+            <h4>Number of Offers</h4>
+          </td>
           <td>
             <input type="number" class="input" v-model="formData.no_offers" />
           </td>
         </tr>
 
         <tr>
-          <td><h4>Estimated Savings</h4></td>
+          <td class="d-flex align-items-center gap-2">
+            <h4 class="m-0">Estimated Savings</h4>
+            <div @mouseenter="tooltip = !tooltip" @mouseleave="tooltip = !tooltip" class="info-btn">
+              <div v-if="tooltip" class="info-tip">
+                Here is going to be the definition for Estimated Savings
+              </div>
+              <p>?</p>
+            </div>
+          </td>
           <td>
             <input type="number" class="input" v-model="formData.est_saving" />
           </td>
@@ -196,6 +206,11 @@ export default {
   components: {
     Datepicker,
     DealPreview,
+  },
+  data() {
+    return {
+      tooltip: false
+    }
   },
   setup() {
     const router = useRouter();
@@ -378,5 +393,26 @@ input[type="radio"]:checked + label {
   border: 2px solid rgb(255, 59, 59);
   background: rgb(255, 175, 175);
   padding: 10px 0;
+}
+
+.info-btn {
+  width: 20px;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.427);
+  color: white;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+
+.info-btn .info-tip {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.531);
+  width: 219px;
+  font-size: 12px;
+  padding: 4px 2px;
+  border-radius: 10px;
+  top: -47px;
+  right: -104px;
 }
 </style>

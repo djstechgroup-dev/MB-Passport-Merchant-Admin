@@ -68,3 +68,8 @@
 .btn-icon:hover {
     background-color: #9abcf7;
 }
+
+.dp__action.dp__select {
+  background-color: #76d2754f;
+  padding: 3px 16px;
+}
